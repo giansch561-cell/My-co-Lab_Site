@@ -1,93 +1,253 @@
+/* =========================================================
+   MY-CO-LAB
+   Design base
+   "Um laboratório moderno no coração de uma floresta antiga."
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   BASE
+   --------------------------------------------------------- */
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f7f3;
-    color: #1f2d1f;
-    line-height: 1.6;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ece8dc;
+    color: #2d322b;
+    line-height: 1.7;
 }
 
+
+/* ---------------------------------------------------------
+   HEADER
+   --------------------------------------------------------- */
+
 header {
-    background: #2f4f3a;
-    color: white;
-    padding: 45px 20px;
+    background: #31442f;
+    color: #f4f0e4;
+    padding: 68px 20px;
     text-align: center;
+    border-bottom: 1px solid #6d755f;
 }
 
 header h1 {
     margin: 0;
-    font-size: 42px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 50px;
+    letter-spacing: 3px;
+    color: #f7f3e7;
 }
 
 header p {
-    margin-top: 10px;
+    max-width: 760px;
+    margin: 14px auto 0;
     font-size: 18px;
+    color: #ddd9cc;
 }
 
+
+/* ---------------------------------------------------------
+   NAVEGAÇÃO
+   --------------------------------------------------------- */
+
 nav {
-    background: #dfe8dc;
-    padding: 15px;
+    background: #3c4d35;
+    padding: 17px 20px;
     text-align: center;
+    border-bottom: 1px solid #6e7964;
+}
+
+nav a,
+nav span {
+    display: inline-block;
+    margin: 0 16px;
+    color: #f0ede4;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
 }
 
 nav a {
-    margin: 0 12px;
-    color: #2f4f3a;
-    text-decoration: none;
-    font-weight: bold;
+    color: #e0bc67;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    color: #f1d68f;
 }
+
+
+/* ---------------------------------------------------------
+   CONTEÚDO PRINCIPAL
+   --------------------------------------------------------- */
 
 main {
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 0 20px;
+    max-width: 1100px;
+    margin: 42px auto;
+    padding: 0 22px;
 }
+
+
+/* ---------------------------------------------------------
+   SECÇÕES
+   --------------------------------------------------------- */
 
 section {
-    background: white;
-    margin-bottom: 22px;
-    padding: 28px;
-    border-radius: 10px;
+    background: #f6f2e8;
+    margin-bottom: 28px;
+    padding: 34px;
+    border: 1px solid #d5cfbd;
+    border-radius: 8px;
 }
 
-h2 {
-    color: #2f4f3a;
+section h2 {
+    margin-top: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    color: #42583b;
+    font-size: 29px;
+    letter-spacing: 0.6px;
 }
+
+section p {
+    color: #3b4038;
+}
+
+
+/* ---------------------------------------------------------
+   LINKS
+   --------------------------------------------------------- */
 
 a {
-    color: #2f4f3a;
+    color: #a66f20;
     font-weight: bold;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 18px;
-    margin-top: 20px;
+a:hover {
+    color: #c98d32;
 }
 
+
+/* ---------------------------------------------------------
+   GRELHA
+   --------------------------------------------------------- */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+    margin-top: 26px;
+}
+
+
+/* ---------------------------------------------------------
+   CARTÕES
+   --------------------------------------------------------- */
+
 .card {
-    background: #f7faf6;
-    border: 1px solid #d8e3d5;
-    border-radius: 10px;
-    padding: 20px;
+    background: #eee8da;
+    border: 1px solid #cfc7b4;
+    border-radius: 8px;
+    padding: 24px;
 }
 
 .card h3 {
     margin-top: 0;
-    color: #2f4f3a;
+    font-family: Georgia, "Times New Roman", serif;
+    color: #4d603f;
+    font-size: 21px;
+    letter-spacing: 0.4px;
 }
+
+.card p {
+    margin-bottom: 0;
+    color: #4a4e46;
+}
+
+
+/* ---------------------------------------------------------
+   CARTÃO MY-CO-LAB
+   --------------------------------------------------------- */
 
 .highlight {
-    border: 2px solid #2f4f3a;
+    background: #e9e2d1;
+    border: 1px solid #b98b43;
 }
 
+.highlight h3 {
+    color: #9d6c22;
+}
+
+
+/* ---------------------------------------------------------
+   DESTAQUES VISUAIS
+   --------------------------------------------------------- */
+
+section:first-of-type {
+    border-left: 4px solid #6e8258;
+}
+
+section:last-of-type {
+    border-bottom: 3px solid #b98b43;
+}
+
+
+/* ---------------------------------------------------------
+   FOOTER
+   --------------------------------------------------------- */
+
 footer {
+    margin-top: 55px;
+    padding: 30px 20px;
     text-align: center;
-    padding: 20px;
-    background: #2f4f3a;
-    color: white;
+    background: #32452f;
+    border-top: 1px solid #6e7964;
+    color: #dedbcf;
+}
+
+footer p {
+    margin: 0;
+}
+
+
+/* ---------------------------------------------------------
+   RESPONSIVO
+   --------------------------------------------------------- */
+
+@media (max-width: 700px) {
+
+    header {
+        padding: 48px 20px;
+    }
+
+    header h1 {
+        font-size: 37px;
+        letter-spacing: 2px;
+    }
+
+    header p {
+        font-size: 16px;
+    }
+
+    nav {
+        padding: 13px 10px;
+    }
+
+    nav a,
+    nav span {
+        margin: 6px 8px;
+        font-size: 14px;
+    }
+
+    main {
+        margin: 28px auto;
+        padding: 0 15px;
+    }
+
+    section {
+        padding: 25px 20px;
+    }
+
+    section h2 {
+        font-size: 24px;
+    }
+
 }

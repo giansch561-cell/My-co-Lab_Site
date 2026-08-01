@@ -1,114 +1,403 @@
-# Website Structure
+# My-Co-Lab — Website Structure
 
 ## Objetivo
 
-O My-Co-Lab pretende ser uma plataforma de referência para quem deseja aprender sobre cogumelos, desde conceitos básicos até técnicas de produção, reunindo informação organizada, documentação prática e experiências reais.
+O My-Co-Lab pretende ser uma plataforma educativa sobre cogumelos que combina conhecimento, cultivo, experimentação e documentação prática.
+
+O website deve permitir que uma pessoa comece pelos conceitos fundamentais sobre fungos e, progressivamente, explore espécies, identificação, cultivo e experiências reais desenvolvidas no projeto My-Co-Lab.
+
+O projeto não pretende nascer completo.
+
+A primeira estrutura deve ser simples, clara, funcional e preparada para receber novo conhecimento continuamente.
 
 ---
 
-# Estrutura do Website
+# Estrutura Principal
 
-## 🏠 Página Principal
+A navegação principal do website será:
 
-A página inicial apresenta o projeto e encaminha o visitante para as diferentes áreas do website.
-
----
-
-## 📚 Aprender
-
-Artigos teóricos e educativos.
-
-### Categorias
-
-- O que são cogumelos
-- Definições
-- Anatomia
-- Ciclo de vida
-- Micélio
-- Esporos
-- Nutrição
-- Reprodução
-- Ecologia
-- Pragas
-- Doenças
-- Contaminações
-- Perguntas frequentes
+* Início
+* Aprender
+* Cogumelos
+* Cultivo
+* My-Co-Lab
+* Sobre
 
 ---
 
-## 🍄 Conhecer os Cogumelos
+# 🏠 Início
+
+A página inicial é a principal porta de entrada do My-Co-Lab.
+
+Deve apresentar rapidamente:
+
+* O que é o My-Co-Lab
+* O que pode ser encontrado no website
+* As principais áreas de conhecimento
+* Conteúdo em destaque
+* Conteúdo recente
+* Estado ou atividade atual do projeto My-Co-Lab
+
+A página deve permitir que um novo visitante compreenda rapidamente o propósito do projeto e escolha o que deseja explorar.
+
+---
+
+# 📚 Aprender
+
+Área dedicada ao conhecimento sobre fungos e micologia.
+
+## Fundamentos
+
+* O que são fungos?
+* O que é um cogumelo?
+* Diferença entre fungo e cogumelo
+* Reino Fungi
+* Importância dos fungos
+
+## Anatomia
+
+* Micélio
+* Hifas
+* Corpo de frutificação
+* Chapéu
+* Lâminas
+* Poros
+* Pé
+* Anel
+* Volva
+
+## Ciclo de Vida
+
+* Esporos
+* Germinação
+* Hifas
+* Micélio
+* Colonização
+* Primórdios
+* Frutificação
+* Libertação de esporos
+
+## Reprodução
+
+* Esporos
+* Reprodução sexuada
+* Reprodução assexuada
+
+## Ecologia
+
+* Fungos saprófitos
+* Fungos parasitas
+* Fungos simbiontes
+* Micorrizas
+* Decomposição
+* Ciclo de nutrientes
+
+## Taxonomia
+
+* Reino
+* Filo
+* Classe
+* Ordem
+* Família
+* Género
+* Espécie
+
+## Identificação
+
+### Observação
+
+* Como observar um cogumelo
+* Características importantes
+* Habitat
+* Substrato
+* Época do ano
+
+### Morfologia
+
+* Chapéu
+* Himénio
+* Lâminas
+* Poros
+* Pé
+* Anel
+* Volva
+* Carne
+
+### Esporos
+
+* Impressão de esporos
+* Cor dos esporos
+* Observação microscópica
+
+### Segurança
+
+* Cogumelos tóxicos
+* Espécies semelhantes
+* Erros de identificação
+* Limitações da identificação através de fotografias
+
+---
+
+# 🍄 Cogumelos
+
+Área dedicada às diferentes espécies de cogumelos.
 
 Cada espécie terá uma ficha própria.
 
-### Exemplo de conteúdo
+## Estrutura de uma ficha de espécie
 
-- Nome científico
-- Nome comum
-- Família
-- Distribuição
-- Habitat
-- Características
-- Cultivo
-- Comestibilidade
-- Utilizações
-- Curiosidades
+* Nome científico
+* Nome comum
+* Taxonomia
+* Identificação
+* Características
+* Habitat
+* Distribuição
+* Ecologia
+* Espécies semelhantes
+* Comestibilidade
+* Utilizações
+* Curiosidades
+* Cultivo, quando aplicável
+* Fotografias
+* Referências
 
----
-
-## 🧪 Produção
-
-Toda a informação relacionada com o cultivo.
-
-### Categorias
-
-- Equipamento
-- Laboratório
-- Substratos
-- Esterilização
-- Pasteurização
-- Spawn
-- Inoculação
-- Incubação
-- Frutificação
-- Colheita
-- Conservação
+A coleção de espécies crescerá progressivamente à medida que novo conteúdo for produzido.
 
 ---
 
-## 📰 Blog
+# 🌱 Cultivo
 
-Área destinada à evolução do projeto.
+Área dedicada ao cultivo e produção de cogumelos.
 
-Exemplos:
+## Fundamentos
 
-- Novidades
-- Experiências
-- Testes
-- Diário de cultivo
-- Atualizações
+* Como cresce um cogumelo
+* Micélio
+* Colonização
+* Frutificação
+
+## Substratos
+
+* Palha
+* Serradura
+* Madeira
+* Grãos
+* Outros substratos
+
+## Preparação
+
+* Esterilização
+* Pasteurização
+* Spawn
+* Inoculação
+* Incubação
+
+## Condições Ambientais
+
+* Temperatura
+* Humidade
+* Luz
+* CO₂
+* Troca de ar
+
+## Frutificação
+
+* Indução
+* Primórdios
+* Desenvolvimento
+* Colheita
+* Flushes
+
+## Problemas
+
+* Contaminações
+* Bolores
+* Bactérias
+* Pragas
+* Má frutificação
+* Diagnóstico
+
+## Métodos de Cultivo
+
+* Sacos
+* Baldes
+* Troncos
+* Grow boxes
+* Outros métodos
 
 ---
 
-## 👤 Sobre
+# 🧪 My-Co-Lab
 
-Apresentação do projeto e do seu criador.
+Área dedicada ao projeto prático e experimental My-Co-Lab.
+
+Esta área documenta a aplicação real do conhecimento apresentado nas restantes áreas do website.
+
+## O Projeto
+
+* Objetivo
+* Filosofia
+* Desenvolvimento
+* Estado atual
+
+## Grow Box
+
+* Estrutura
+* Humidificação
+* Ventilação
+* Iluminação
+* Ambiente
+
+## Hardware
+
+* Raspberry Pi
+* Raspberry Pi Pico
+* Sensores
+* Relés
+* Câmara
+* Outros componentes
+
+## Automação
+
+* Temperatura
+* Humidade
+* Ventilação
+* Monitorização
+
+## Dados
+
+* Temperatura
+* Humidade
+* Registos
+* Gráficos
+
+## Experiências
+
+Cada experiência poderá ser documentada individualmente.
+
+## Frutificações
+
+Cada frutificação poderá incluir:
+
+* Preparação
+* Espécie
+* Condições ambientais
+* Desenvolvimento
+* Fotografias
+* Timelapse
+* Colheita
+* Resultados
+* Problemas encontrados
+* Observações
+* Conclusões
+
+## Build Log
+
+Registo cronológico da evolução técnica do projeto My-Co-Lab.
 
 ---
 
-## 📩 Contacto
+# 👤 Sobre
 
-Formulário e informações de contacto.
+Área destinada à apresentação do projeto.
+
+Pode incluir:
+
+* O que é o My-Co-Lab
+* Porque foi criado
+* Filosofia
+* Objetivos
+* Autor
+* Fontes e referências
+* Contacto
+
+---
+
+# Desenvolvimento do Website
+
+O My-Co-Lab será desenvolvido progressivamente.
+
+O objetivo inicial é construir uma estrutura simples, coerente, navegável e visualmente consistente.
+
+Em paralelo serão desenvolvidos:
+
+* Artigos
+* Fichas de espécies
+* Conteúdo sobre cultivo
+* Fotografias
+* Experiências
+* Documentação
+* Dados
+* Descobertas realizadas durante o projeto
+
+O website não precisa de estar completo para crescer.
+
+---
+
+# Crescimento por Camadas
+
+Depois da estrutura inicial estar funcional, o My-Co-Lab crescerá através de novas camadas de conteúdo e desenvolvimento.
+
+Cada camada poderá acrescentar:
+
+* Novo conhecimento
+* Novos artigos
+* Novas espécies
+* Novas informações sobre cultivo
+* Novas experiências
+* Novas fotografias
+* Novos dados
+* Melhorias no próprio website
+
+Sempre que possível, o crescimento deve acontecer de forma equilibrada entre as diferentes áreas.
+
+A estrutura poderá ser reorganizada no futuro caso a quantidade de conteúdo ou a evolução do projeto o justifique.
+
+---
+
+# Lançamento Público
+
+O lançamento público do My-Co-Lab Site acontecerá depois da conclusão e documentação da primeira frutificação do projeto My-Co-Lab.
+
+Até esse momento, o website continuará a ser desenvolvido e receberá conteúdo em paralelo.
+
+A primeira frutificação servirá como primeiro grande marco prático do projeto.
 
 ---
 
 # Futuro
 
-Quando o projeto estiver mais desenvolvido poderão ser adicionadas novas áreas, tais como:
+Novas áreas só deverão ser introduzidas quando existir conteúdo ou uma necessidade real que as justifique.
 
-- Loja online
-- Área de membros
-- Cursos
-- Downloads
-- Newsletter
+Possibilidades futuras incluem:
 
-Estas funcionalidades não fazem parte da versão inicial do projeto.
+* Blog
+* Parcerias
+* Colaborações
+* Newsletter
+* Downloads
+* Cursos
+* Área de membros
+* Loja online
+* Outras áreas resultantes da evolução do projeto
+
+Estas áreas não fazem parte da estrutura inicial e não precisam de ser preparadas antecipadamente.
+
+---
+
+# Princípio Orientador
+
+O My-Co-Lab deve crescer juntamente com o conhecimento e com as experiências realizadas.
+
+Construir.
+
+Documentar.
+
+Publicar.
+
+Aprender.
+
+Melhorar.
+
+Continuar a crescer.
