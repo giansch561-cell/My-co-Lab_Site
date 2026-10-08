@@ -1,11 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Introdução ao cultivo de cogumelos: substrato, colonização, frutificação e observação no My-co-Lab.">
+    <title>Cultivo de cogumelos | My-co-Lab</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header>
+    <h1>Cultivo de cogumelos</h1>
+    <p>Uma introdução ao processo, da preparação do substrato à observação da frutificação.</p>
+</header>
 
-reddevil@myco-site:~/My-co-Lab_Site $ grep -A7 "<nav>" website/index.html
-<nav>
-    <a href="index.html">Início</a>
-    <a href="pages/learn.html">Aprender</a>
-    <a href="pages/mushrooms.html">Cogumelos</a>
-    <a href="cultivation.html">Cultivo</a>
-    <a href="pages/first-fruiting.html">My-Co-Lab</a>
-    <a href="pages/about.html">Sobre</a>
+<nav aria-label="Navegação principal">
+    <a href="../index.html">Início</a>
+    <a href="learn.html">Aprender</a>
+    <a href="mushrooms.html">Cogumelos</a>
+    <a href="cultivation.html" aria-current="page">Cultivo</a>
+    <a href="first-fruiting.html">My-co-Lab</a>
+    <a href="about.html">Sobre</a>
 </nav>
-reddevil@myco-site:~/My-co-Lab_Site $ 
+
+<main>
+    <section>
+        <h2>Do micélio ao cogumelo</h2>
+        <p>O cultivo começa com uma cultura de fungo saudável e um substrato apropriado. O micélio coloniza esse material; mais tarde, em condições adequadas, pode formar corpos de frutificação: os cogumelos.</p>
+        <p>Estas páginas acompanham o processo de forma gradual. A primeira espécie que o My-co-Lab pretende documentar é <em>Pleurotus ostreatus</em>, o cogumelo-ostra. A primeira frutificação ainda não começou.</p>
+    </section>
+
+    <section>
+        <h2>Etapas principais</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>1. Preparação</h3>
+                <p>Escolher o substrato e preparar um espaço e materiais limpos. O método concreto depende da espécie e do material utilizado.</p>
+            </div>
+            <div class="card">
+                <h3>2. Inoculação e colonização</h3>
+                <p>Introduzir o micélio no substrato e acompanhar o seu crescimento. Observar regularmente sinais de contaminação.</p>
+            </div>
+            <div class="card">
+                <h3>3. Frutificação</h3>
+                <p>Depois de colonizado, o cultivo passa a uma fase em que humidade, temperatura, ar e luz influenciam o desenvolvimento dos cogumelos.</p>
+            </div>
+            <div class="card">
+                <h3>4. Registo e colheita</h3>
+                <p>Fotografar, medir e anotar o que acontece. A colheita e a avaliação dos resultados completam cada ensaio.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>O que medimos no My-co-Lab</h2>
+        <p>O protótipo já regista temperatura e humidade e tira fotografias automaticamente. Um teste curto mostrou a humidade a subir durante o funcionamento do humidificador e da ventoinha; o comportamento após desligar os aparelhos ainda está em observação.</p>
+        <p>Os relés foram testados sem cargas. O controlo automático dos aparelhos será validado antes de iniciar a primeira frutificação. As medições ajudam a observar o ambiente, mas não substituem a observação direta do cultivo.</p>
+        <p><a href="first-fruiting.html">Acompanhar o estado da primeira frutificação</a></p>
+    </section>
+
+    <section>
+        <h2>Aprender com cada ensaio</h2>
+        <p>Vamos publicar os métodos, medições e fotografias depois de os rever. O objetivo é distinguir as condições testadas dos resultados realmente observados, incluindo aquilo que não funcionar.</p>
+        <p><a href="what-are-mushrooms.html">Começar pelos fundamentos: o que são cogumelos?</a></p>
+    </section>
+</main>
+
+<footer>
+    <p>My-co-Lab — aprender, experimentar e documentar o cultivo de cogumelos.</p>
+</footer>
+</body>
+</html>
