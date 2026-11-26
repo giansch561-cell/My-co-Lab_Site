@@ -1,0 +1,10 @@
+<li>
+    <a class="cartao" href="{{ destino }}">
+        <span class="cartao-titulo">{{ titulo }}</span>
+        {% if imagem %}
+            <img class="cartao-imagem{% if esboco %} esboco{% endif %}" src="{{ imagem.url }}" alt="" loading="lazy" decoding="async">
+        {% else %}
+            <span class="cartao-imagem espaco-imagem" aria-hidden="true"></span>
+        {% endif %}
+    </a>
+</li>

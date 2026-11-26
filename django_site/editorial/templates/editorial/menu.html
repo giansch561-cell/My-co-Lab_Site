@@ -1,0 +1,8 @@
+<ul class="menu">
+    <li><a href="{% url 'editorial:inicio' %}"{% if secao == 'inicio' %} aria-current="page"{% endif %}>Início</a></li>
+    <li><a href="{% url 'editorial:sobre' %}"{% if secao == 'sobre' %} aria-current="page"{% endif %}>Sobre</a></li>
+    <li><a href="{% url 'editorial:artigos' %}"{% if secao == 'artigos' %} aria-current="{% if ficha %}location{% else %}page{% endif %}"{% endif %}>À volta dos cogumelos</a></li>
+    <li><a href="{% url 'editorial:cogumelos' %}"{% if secao == 'cogumelos' %} aria-current="{% if ficha %}location{% else %}page{% endif %}"{% endif %}>Cogumelos</a></li>
+    <li><a href="{% url 'editorial:cultivo' %}"{% if secao == 'cultivo' %} aria-current="{% if ficha %}location{% else %}page{% endif %}"{% endif %}>Cultivo</a></li>
+    <li><a href="{% url 'editorial:mycobox' %}"{% if secao == 'mycobox' %} aria-current="page"{% endif %}>MycoBox</a></li>
+</ul>

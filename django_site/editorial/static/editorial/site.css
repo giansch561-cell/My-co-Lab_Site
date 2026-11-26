@@ -1,0 +1,341 @@
+:root {
+    color-scheme: light;
+    --marfim: #f8f3e8;
+    --tinta: #413932;
+    --musgo: #4c5e43;
+    --musgo-escuro: #37472f;
+    --ocre: #c5a369;
+    --borda: #ddd1bd;
+    --espaco-imagem: #eee7d9;
+    --serifa: Georgia, "Liberation Serif", "Times New Roman", serif;
+    --texto: system-ui, -apple-system, sans-serif;
+    --gutter: clamp(1rem, 3vw, 3.5rem);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    color: var(--tinta);
+    background: var(--marfim);
+    font: 1rem/1.55 var(--texto);
+}
+
+a {
+    color: var(--musgo-escuro);
+    text-underline-offset: .2em;
+}
+
+a:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--musgo);
+    outline-offset: 4px;
+}
+
+img, video {
+    display: block;
+    width: 100%;
+}
+
+.saltar {
+    position: absolute;
+    z-index: 2;
+    inset: .75rem auto auto .75rem;
+    padding: .5rem .85rem;
+    background: var(--marfim);
+    transform: translateY(-200%);
+}
+
+.saltar:focus {
+    transform: none;
+}
+
+.largura {
+    width: min(100% - var(--gutter) * 2, 91rem);
+    margin-inline: auto;
+}
+
+.cabecalho-interno, .rodape-interno {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.cabecalho-interno {
+    min-height: 5.25rem;
+    border-bottom: 1px solid var(--borda);
+}
+
+.marca {
+    display: inline-flex;
+    align-items: center;
+    gap: .8rem;
+    color: var(--musgo-escuro);
+    text-decoration: none;
+    white-space: nowrap;
+    font: 500 clamp(1.55rem, 3vw, 2.65rem)/1 var(--serifa);
+}
+
+.simbolo {
+    width: 1.28em;
+    height: 1.28em;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .65rem clamp(1rem, 2.4vw, 2.6rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.menu a {
+    display: block;
+    padding: .6rem 0;
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+    font-size: .94rem;
+    font-weight: 550;
+}
+
+.menu a:hover, .menu a[aria-current] {
+    border-color: var(--musgo);
+}
+
+.menu-telemovel {
+    display: none;
+}
+
+.corpo {
+    flex: 1;
+    padding-block: clamp(1.75rem, 4vw, 4rem);
+}
+
+h1, h2 {
+    margin: 0 0 .55em;
+    font-family: var(--serifa);
+    font-weight: 500;
+    line-height: 1.04;
+    overflow-wrap: anywhere;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 5.4vw, 5.8rem);
+    letter-spacing: -.03em;
+}
+
+h1::before {
+    display: block;
+    width: 1.2em;
+    height: 3px;
+    margin-bottom: .38em;
+    content: "";
+    background: var(--ocre);
+}
+
+h2 {
+    font-size: clamp(1.7rem, 3vw, 2.7rem);
+}
+
+.abertura {
+    display: grid;
+    grid-template-columns: minmax(0, .82fr) minmax(0, 1.35fr);
+    align-items: center;
+    gap: clamp(1.25rem, 3vw, 4rem);
+}
+
+.abertura-imagem {
+    aspect-ratio: 3 / 2;
+    height: auto;
+    object-fit: cover;
+}
+
+.introducao {
+    max-width: 54ch;
+    font-size: clamp(1rem, 1.5vw, 1.4rem);
+    line-height: 1.52;
+}
+
+.introducao p {
+    margin: 0 0 1.25rem;
+}
+
+.botao {
+    display: inline-block;
+    padding: .8rem 1.25rem;
+    border-radius: .4rem;
+    background: var(--musgo);
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 650;
+}
+
+.botao:hover {
+    background: var(--musgo-escuro);
+}
+
+.grelha {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.abertura + .grelha {
+    margin-top: clamp(1.5rem, 3.7vw, 3.5rem);
+}
+
+.grelha > li {
+    display: flex;
+}
+
+.cartao {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: .55rem;
+    min-width: 0;
+    padding: .55rem;
+    border: 1px solid var(--borda);
+    border-radius: .4rem;
+    text-decoration: none;
+}
+
+.cartao:hover, .cartao:focus-visible {
+    border-color: var(--musgo);
+}
+
+.cartao-titulo {
+    padding: .3rem .3rem .1rem;
+    font: 500 clamp(1.36rem, 2.3vw, 2.15rem)/1.13 var(--serifa);
+    overflow-wrap: anywhere;
+}
+
+.cartao-imagem {
+    display: block;
+    aspect-ratio: 2 / 1;
+    width: 100%;
+    object-fit: cover;
+}
+
+.esboco {
+    object-fit: contain;
+}
+
+.espaco-imagem {
+    background: var(--espaco-imagem);
+}
+
+.leitura {
+    max-width: 68ch;
+}
+
+.abertura + .leitura, .colheita, .ligacao-secao {
+    margin-top: 2rem;
+}
+
+.colheita {
+    max-width: 58rem;
+}
+
+.paginacao {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.preco {
+    display: inline-block;
+    margin-left: .75rem;
+}
+
+.fontes {
+    padding-left: 1.25rem;
+}
+
+.fontes li {
+    margin-bottom: .85rem;
+}
+
+.fontes span {
+    display: block;
+}
+
+.rodape-interno {
+    min-height: 4.35rem;
+    border-top: 1px solid var(--borda);
+    color: var(--musgo-escuro);
+    font-family: var(--serifa);
+}
+
+.rodape-interno span {
+    font-size: 1.35rem;
+}
+
+@media (max-width: 62rem) {
+    .menu-computador {
+        display: none;
+    }
+
+    .menu-telemovel {
+        display: block;
+        position: relative;
+        color: var(--musgo-escuro);
+    }
+
+    .menu-telemovel summary {
+        padding: .55rem .3rem;
+        cursor: pointer;
+        font-weight: 650;
+    }
+
+    .menu-telemovel nav {
+        position: absolute;
+        z-index: 1;
+        top: calc(100% + .45rem);
+        right: 0;
+        width: min(17rem, calc(100vw - var(--gutter) * 2));
+        padding: .25rem 1rem;
+        border: 1px solid var(--borda);
+        border-radius: .35rem;
+        background: var(--marfim);
+    }
+
+    .menu-telemovel .menu {
+        display: block;
+    }
+}
+
+@media (max-width: 48rem) {
+    .cabecalho-interno {
+        min-height: 4rem;
+    }
+
+    .abertura, .grelha {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .abertura > .abertura-imagem {
+        grid-row: 1;
+    }
+
+    .abertura .botao {
+        width: 100%;
+    }
+
+    .cartao-titulo {
+        font-size: 1.6rem;
+    }
+}

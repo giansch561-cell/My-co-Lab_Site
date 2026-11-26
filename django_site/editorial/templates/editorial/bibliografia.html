@@ -1,0 +1,21 @@
+{% extends 'editorial/base.html' %}
+{% block titulo %}Bibliografia | My-co-Lab{% endblock %}
+{% block conteudo %}
+    <div class="leitura">
+        <h1>Bibliografia</h1>
+        {% if fontes %}
+            <ul class="fontes">
+                {% for fonte in fontes %}
+                    <li>
+                        {% if fonte.url %}
+                            <a href="{{ fonte.url }}">{{ fonte.titulo }}</a>
+                        {% else %}
+                            <cite>{{ fonte.titulo }}</cite>
+                        {% endif %}
+                        {% if fonte.referencia %}<span>{{ fonte.referencia }}</span>{% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

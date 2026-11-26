@@ -1,0 +1,37 @@
+{% extends 'editorial/base.html' %}
+{% block titulo %}{{ ficha.titulo }} | My-co-Lab{% endblock %}
+{% block conteudo %}
+    <article>
+        <div class="{% if ficha.imagem %}abertura{% else %}leitura{% endif %}">
+            <div class="abertura-texto">
+                <h1>{{ ficha.titulo }}</h1>
+                {% if ficha.resumo %}
+                    <div class="introducao">{{ ficha.resumo|linebreaks }}</div>
+                {% endif %}
+            </div>
+            {% if ficha.imagem %}
+                <img class="abertura-imagem" src="{{ ficha.imagem.url }}" alt="{{ ficha.imagem_alt }}">
+            {% endif %}
+        </div>
+        {% if ficha.texto %}
+            <div class="leitura">{{ ficha.texto|linebreaks }}</div>
+        {% endif %}
+        {% if secao == 'cogumelos' and ficha.metodo_cultivo.publicado %}
+            <p class="ligacao-secao">
+                <a href="{{ ficha.metodo_cultivo.get_absolute_url }}">Aprender a cultivar</a>
+            </p>
+        {% elif secao == 'cultivo' %}
+            {% if ficha.url_compra and ficha.preco %}
+                <p class="ligacao-secao">
+                    <a class="botao" href="{{ ficha.url_compra }}">Comprar o guia em PDF</a>
+                    <span class="preco">{{ ficha.preco }}</span>
+                </p>
+            {% endif %}
+            {% if ficha.mostrar_mycobox %}
+                <p class="ligacao-secao">
+                    <a href="{% url 'editorial:mycobox' %}">Conhecer o projeto GrowBox</a>
+                </p>
+            {% endif %}
+        {% endif %}
+    </article>
+{% endblock %}

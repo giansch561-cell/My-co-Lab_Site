@@ -1,0 +1,29 @@
+{% extends 'editorial/base.html' %}
+{% load static %}
+{% block titulo %}{{ titulo }} | My-co-Lab{% endblock %}
+{% block conteudo %}
+    <section class="{% if pagina.imagem or imagem_padrao %}abertura{% else %}leitura{% endif %}">
+        <div class="abertura-texto">
+            <h1>{{ titulo }}</h1>
+            {% if pagina.introducao %}
+                <div class="introducao">{{ pagina.introducao|linebreaks }}</div>
+            {% endif %}
+        </div>
+        {% if pagina.imagem %}
+            <img class="abertura-imagem" src="{{ pagina.imagem.url }}" alt="{{ pagina.imagem_alt }}">
+        {% elif imagem_padrao %}
+            <img class="abertura-imagem" src="{% static imagem_padrao %}" width="1400" height="933" alt="Esboço dos cogumelos-ostra a crescer no bloco de cultivo, dentro da GrowBox.">
+        {% endif %}
+    </section>
+    {% if pagina.texto %}
+        <div class="leitura">{{ pagina.texto|linebreaks }}</div>
+    {% endif %}
+    {% if secao == 'mycobox' and pagina.timelapse %}
+        <section class="colheita">
+            <h2>Primeira colheita</h2>
+            <video controls playsinline preload="metadata" aria-label="Timelapse da primeira colheita" src="{{ pagina.timelapse.url }}">
+                <a href="{{ pagina.timelapse.url }}">Ver o timelapse</a>
+            </video>
+        </section>
+    {% endif %}
+{% endblock %}
