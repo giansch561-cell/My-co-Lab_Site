@@ -1,21 +1,21 @@
 {% extends 'editorial/base.html' %}
-{% load static %}
+{% load static i18n idiomas %}
 {% block conteudo %}
     <section class="abertura">
         <div class="abertura-texto">
             <h1>My-co-Lab</h1>
-            {% if pagina.introducao %}
-                <div class="introducao">{{ pagina.introducao|linebreaks }}</div>
-            {% endif %}
-            <a class="botao" href="{% url 'editorial:mycobox' %}">Conhecer o projeto GrowBox</a>
+            {% with introducao=pagina|texto_localizado:"introducao" %}
+                {% if introducao %}<div class="introducao">{{ introducao|linebreaks }}</div>{% endif %}
+            {% endwith %}
+            <a class="botao" href="{% url 'editorial:mycobox' %}">{% translate "Conhecer o projeto GrowBox" %}</a>
         </div>
         {% if pagina.imagem %}
-            <img class="abertura-imagem" src="{{ pagina.imagem.url }}" alt="{{ pagina.imagem_alt }}" fetchpriority="high">
+            <img class="abertura-imagem" src="{{ pagina.imagem.url }}" alt="{{ pagina|texto_localizado:'imagem_alt' }}" fetchpriority="high">
         {% else %}
-            <img class="abertura-imagem" src="{% static 'editorial/bosque.webp' %}" width="1400" height="933" alt="Uma criança segue por um caminho no bosque de outono, entre as árvores e a névoa." fetchpriority="high">
+            <img class="abertura-imagem" src="{% static 'editorial/bosque.webp' %}" width="1400" height="933" alt="{% translate 'Uma criança segue por um caminho no bosque de outono, entre as árvores e a névoa.' %}" fetchpriority="high">
         {% endif %}
     </section>
-    <ul class="grelha" aria-label="Explorar o My-co-Lab">
+    <ul class="grelha" aria-label="{% translate 'Explorar o My-co-Lab' %}">
         {% for cartao in cartoes %}
             {% url cartao.rota as destino %}
             {% include 'editorial/cartao.html' with titulo=cartao.titulo imagem=cartao.pagina.imagem destino=destino only %}

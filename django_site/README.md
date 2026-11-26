@@ -32,6 +32,18 @@ Abre `http://127.0.0.1:8000/` para ver o site e
   disponível. A ligação é apresentada quando ambos estiverem preenchidos.
 - **Fontes.** Acrescenta as referências usadas. Aparecem na Bibliografia.
 
+## Idiomas
+
+O seletor **PT · DE · EN** no cabeçalho abre a mesma página na língua escolhida.
+O português mantém os endereços originais. As versões alemã e inglesa usam os
+prefixos `/de/` e `/en/`.
+
+No painel de administração, as páginas, os artigos, as fichas de cogumelos e os
+métodos de cultivo têm secções **Alemão** e **Inglês**. Os campos por preencher
+mostram o texto em português. As traduções do menu e dos botões já vêm com o site.
+Depois de editar os ficheiros `.po` da interface, recompila-os com
+`python manage.py compilemessages -l de -l en`, com GNU gettext instalado.
+
 O servidor `runserver` serve a prévia local. A publicação tem configuração
 própria. Se desativares a prévia com `DJANGO_DEBUG=0`, define
 `DJANGO_SECRET_KEY` e `DJANGO_ALLOWED_HOSTS` no ambiente.

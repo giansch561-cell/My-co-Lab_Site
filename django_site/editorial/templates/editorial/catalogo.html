@@ -1,28 +1,31 @@
 {% extends 'editorial/base.html' %}
+{% load i18n idiomas %}
 {% block titulo %}{{ titulo }} | My-co-Lab{% endblock %}
 {% block conteudo %}
     <h1>{{ titulo }}</h1>
     {% if fichas %}
         <ul class="grelha">
             {% for ficha in fichas %}
-                {% if secao == 'cogumelos' %}
-                    {% include 'editorial/cartao.html' with titulo=ficha.titulo imagem=ficha.esboco destino=ficha.get_absolute_url esboco=True only %}
-                {% else %}
-                    {% include 'editorial/cartao.html' with titulo=ficha.titulo imagem=ficha.imagem destino=ficha.get_absolute_url only %}
-                {% endif %}
+                {% with nome=ficha|texto_localizado:"titulo" %}
+                    {% if secao == 'cogumelos' %}
+                        {% include 'editorial/cartao.html' with titulo=nome imagem=ficha.esboco destino=ficha.get_absolute_url esboco=True only %}
+                    {% else %}
+                        {% include 'editorial/cartao.html' with titulo=nome imagem=ficha.imagem destino=ficha.get_absolute_url only %}
+                    {% endif %}
+                {% endwith %}
             {% endfor %}
         </ul>
     {% else %}
-        <p>Ainda não há fichas publicadas nesta secção.</p>
+        <p>{% translate "Ainda não há fichas publicadas nesta secção." %}</p>
     {% endif %}
     {% if is_paginated %}
-        <nav class="paginacao" aria-label="Páginas do catálogo">
+        <nav class="paginacao" aria-label="{% translate 'Páginas do catálogo' %}">
             {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                <a href="?page={{ page_obj.previous_page_number }}">{% translate "Anterior" %}</a>
             {% endif %}
-            <span>Página {{ page_obj.number }} de {{ paginator.num_pages }}</span>
+            <span>{% blocktranslate with atual=page_obj.number total=paginator.num_pages %}Página {{ atual }} de {{ total }}{% endblocktranslate %}</span>
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Seguinte</a>
+                <a href="?page={{ page_obj.next_page_number }}">{% translate "Seguinte" %}</a>
             {% endif %}
         </nav>
     {% endif %}

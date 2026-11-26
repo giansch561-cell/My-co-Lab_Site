@@ -1,6 +1,7 @@
-{% load static %}
+{% load static i18n %}
+{% get_current_language as idioma_atual %}
 <!doctype html>
-<html lang="pt-PT">
+<html lang="{{ idioma_atual }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'editorial/site.css' %}">
 </head>
 <body>
-    <a class="saltar" href="#conteudo">Ir para o conteúdo</a>
+    <a class="saltar" href="#conteudo">{% translate "Ir para o conteúdo" %}</a>
     <header class="cabecalho">
         <div class="largura cabecalho-interno">
             <a class="marca" href="{% url 'editorial:inicio' %}">
@@ -19,15 +20,16 @@
                 </svg>
                 <span>My-co-Lab</span>
             </a>
-            <nav class="menu-computador" aria-label="Menu principal">
+            <nav class="menu-computador" aria-label="{% translate 'Menu principal' %}">
                 {% include 'editorial/menu.html' %}
             </nav>
             <details class="menu-telemovel">
-                <summary>Menu</summary>
-                <nav aria-label="Menu principal">
+                <summary>{% translate "Menu" %}</summary>
+                <nav aria-label="{% translate 'Menu principal' %}">
                     {% include 'editorial/menu.html' %}
                 </nav>
             </details>
+            {% include 'editorial/seletor_idioma.html' %}
         </div>
     </header>
     <main class="largura corpo" id="conteudo" tabindex="-1">
@@ -36,7 +38,7 @@
     <footer class="rodape">
         <div class="largura rodape-interno">
             <span>My-co-Lab</span>
-            <a href="{% url 'editorial:bibliografia' %}"{% if secao == 'bibliografia' %} aria-current="page"{% endif %}>Bibliografia</a>
+            <a href="{% url 'editorial:bibliografia' %}"{% if secao == 'bibliografia' %} aria-current="page"{% endif %}>{% translate "Bibliografia" %}</a>
         </div>
     </footer>
 </body>

@@ -1,0 +1,85 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: My-co-Lab\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Ainda não há fichas publicadas nesta secção."
+msgstr "In diesem Bereich sind noch keine Einträge veröffentlicht."
+
+msgid "Anterior"
+msgstr "Zurück"
+
+msgid "Aprender a cultivar"
+msgstr "Pilzzucht lernen"
+
+msgid "Bibliografia"
+msgstr "Quellen"
+
+msgid "Cogumelos"
+msgstr "Pilze"
+
+msgid "Como tudo começou"
+msgstr "Wie alles begann"
+
+msgid "Comprar o guia em PDF"
+msgstr "PDF-Leitfaden kaufen"
+
+msgid "Conhecer o projeto GrowBox"
+msgstr "Das GrowBox-Projekt entdecken"
+
+msgid "Cultivo"
+msgstr "Zucht"
+
+msgid "Esboço dos cogumelos-ostra a crescer no bloco de cultivo, dentro da GrowBox."
+msgstr "Skizze von Austernseitlingen, die auf dem Zuchtblock in der GrowBox wachsen."
+
+msgid "Explorar o My-co-Lab"
+msgstr "My-co-Lab entdecken"
+
+msgid "Idioma"
+msgstr "Sprache"
+
+msgid "Início"
+msgstr "Startseite"
+
+msgid "Ir para o conteúdo"
+msgstr "Zum Inhalt springen"
+
+msgid "Menu"
+msgstr "Menü"
+
+msgid "Menu principal"
+msgstr "Hauptmenü"
+
+msgid "Primeira colheita"
+msgstr "Erste Ernte"
+
+#, python-format
+msgid "Página %(atual)s de %(total)s"
+msgstr "Seite %(atual)s von %(total)s"
+
+msgid "Páginas do catálogo"
+msgstr "Katalogseiten"
+
+msgid "Seguinte"
+msgstr "Weiter"
+
+msgid "Sobre"
+msgstr "Über mich"
+
+msgid "Timelapse da primeira colheita"
+msgstr "Zeitraffer der ersten Ernte"
+
+msgid "Uma criança segue por um caminho no bosque de outono, entre as árvores e a névoa."
+msgstr "Ein Kind geht auf einem Weg durch einen nebligen Herbstwald."
+
+msgid "Ver o timelapse"
+msgstr "Zeitraffer ansehen"
+
+msgid "À volta dos cogumelos"
+msgstr "Rund um Pilze"

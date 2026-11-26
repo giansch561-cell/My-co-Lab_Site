@@ -1,0 +1,7 @@
+{% load i18n idiomas %}
+{% get_available_languages as idiomas %}
+<nav class="idiomas" aria-label="{% translate 'Idioma' %}">
+    {% for codigo, nome in idiomas %}
+        <a href="{% endereco_no_idioma request.get_full_path codigo %}" hreflang="{{ codigo }}" lang="{{ codigo }}" aria-label="{{ nome }}" title="{{ nome }}"{% if codigo == idioma_atual %} aria-current="true"{% endif %}>{{ codigo|slice:":2"|upper }}</a>
+    {% endfor %}
+</nav>

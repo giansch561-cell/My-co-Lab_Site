@@ -113,6 +113,32 @@ img, video {
     display: none;
 }
 
+.idiomas {
+    display: flex;
+    gap: .15rem;
+}
+
+.idiomas a {
+    display: grid;
+    place-items: center;
+    min-width: 2rem;
+    min-height: 2.25rem;
+    padding: .15rem .25rem;
+    border-radius: .3rem;
+    font-size: .8rem;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.idiomas a:hover {
+    background: var(--espaco-imagem);
+}
+
+.idiomas a[aria-current] {
+    color: white;
+    background: var(--musgo);
+}
+
 .corpo {
     flex: 1;
     padding-block: clamp(1.75rem, 4vw, 4rem);
@@ -284,7 +310,7 @@ h2 {
     font-size: 1.35rem;
 }
 
-@media (max-width: 62rem) {
+@media (max-width: 69rem) {
     .menu-computador {
         display: none;
     }
@@ -292,6 +318,7 @@ h2 {
     .menu-telemovel {
         display: block;
         position: relative;
+        margin-left: auto;
         color: var(--musgo-escuro);
     }
 
@@ -320,7 +347,20 @@ h2 {
 
 @media (max-width: 48rem) {
     .cabecalho-interno {
+        flex-wrap: wrap;
         min-height: 4rem;
+        gap: .25rem .6rem;
+        padding-block: .3rem;
+    }
+
+    .marca {
+        gap: .4rem;
+        font-size: clamp(1.25rem, 5vw, 1.55rem);
+    }
+
+    .idiomas a {
+        min-width: 1.7rem;
+        padding-inline: .15rem;
     }
 
     .abertura, .grelha {

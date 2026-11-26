@@ -1,0 +1,85 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: My-co-Lab\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Ainda não há fichas publicadas nesta secção."
+msgstr "There are no published entries in this section yet."
+
+msgid "Anterior"
+msgstr "Previous"
+
+msgid "Aprender a cultivar"
+msgstr "Learn how to grow mushrooms"
+
+msgid "Bibliografia"
+msgstr "Bibliography"
+
+msgid "Cogumelos"
+msgstr "Mushrooms"
+
+msgid "Como tudo começou"
+msgstr "How it all began"
+
+msgid "Comprar o guia em PDF"
+msgstr "Buy the PDF guide"
+
+msgid "Conhecer o projeto GrowBox"
+msgstr "Explore the GrowBox project"
+
+msgid "Cultivo"
+msgstr "Cultivation"
+
+msgid "Esboço dos cogumelos-ostra a crescer no bloco de cultivo, dentro da GrowBox."
+msgstr "Sketch of oyster mushrooms growing on the substrate block inside the GrowBox."
+
+msgid "Explorar o My-co-Lab"
+msgstr "Explore My-co-Lab"
+
+msgid "Idioma"
+msgstr "Language"
+
+msgid "Início"
+msgstr "Home"
+
+msgid "Ir para o conteúdo"
+msgstr "Skip to content"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Menu principal"
+msgstr "Main navigation"
+
+msgid "Primeira colheita"
+msgstr "First harvest"
+
+#, python-format
+msgid "Página %(atual)s de %(total)s"
+msgstr "Page %(atual)s of %(total)s"
+
+msgid "Páginas do catálogo"
+msgstr "Catalogue pages"
+
+msgid "Seguinte"
+msgstr "Next"
+
+msgid "Sobre"
+msgstr "About me"
+
+msgid "Timelapse da primeira colheita"
+msgstr "First harvest time-lapse"
+
+msgid "Uma criança segue por um caminho no bosque de outono, entre as árvores e a névoa."
+msgstr "A child follows a path through a misty autumn woodland."
+
+msgid "Ver o timelapse"
+msgstr "Watch the time-lapse"
+
+msgid "À volta dos cogumelos"
+msgstr "About mushrooms"

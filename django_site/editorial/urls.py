@@ -1,4 +1,5 @@
 from django.urls import path
+from django.utils.translation import gettext_lazy as _
 
 from . import views
 from .models import Artigo, Cogumelo, MetodoCultivo
@@ -11,12 +12,12 @@ metodos = MetodoCultivo.objects.filter(publicado=True)
 
 urlpatterns = [
     path("", views.inicio, name="inicio"),
-    path("sobre/", views.pagina, {"secao": "sobre", "titulo": "Como tudo começou"}, name="sobre"),
+    path("sobre/", views.pagina, {"secao": "sobre", "titulo": _("Como tudo começou")}, name="sobre"),
     path(
         "a-volta-dos-cogumelos/",
         views.CatalogoView.as_view(
             queryset=artigos,
-            extra_context={"titulo": "À volta dos cogumelos", "secao": "artigos"},
+            extra_context={"titulo": _("À volta dos cogumelos"), "secao": "artigos"},
         ),
         name="artigos",
     ),
@@ -29,7 +30,7 @@ urlpatterns = [
         "cogumelos/",
         views.CatalogoView.as_view(
             queryset=cogumelos,
-            extra_context={"titulo": "Cogumelos", "secao": "cogumelos"},
+            extra_context={"titulo": _("Cogumelos"), "secao": "cogumelos"},
         ),
         name="cogumelos",
     ),
@@ -42,7 +43,7 @@ urlpatterns = [
         "cultivo/",
         views.CatalogoView.as_view(
             queryset=metodos,
-            extra_context={"titulo": "Cultivo", "secao": "cultivo"},
+            extra_context={"titulo": _("Cultivo"), "secao": "cultivo"},
         ),
         name="cultivo",
     ),

@@ -1,20 +1,33 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 
-class Pagina(models.Model):
+class ConteudoTraduzivel(models.Model):
+    imagem_alt_de = models.CharField("texto alternativo — alemão", max_length=180, blank=True)
+    imagem_alt_en = models.CharField("texto alternativo — inglês", max_length=180, blank=True)
+
+    class Meta:
+        abstract = True
+
+
+class Pagina(ConteudoTraduzivel):
     class Secao(models.TextChoices):
-        INICIO = "inicio", "Início"
-        SOBRE = "sobre", "Sobre"
-        ARTIGOS = "artigos", "À volta dos cogumelos"
-        COGUMELOS = "cogumelos", "Cogumelos"
-        CULTIVO = "cultivo", "Cultivo"
+        INICIO = "inicio", _("Início")
+        SOBRE = "sobre", _("Sobre")
+        ARTIGOS = "artigos", _("À volta dos cogumelos")
+        COGUMELOS = "cogumelos", _("Cogumelos")
+        CULTIVO = "cultivo", _("Cultivo")
         MYCOBOX = "mycobox", "MycoBox"
 
     secao = models.CharField("secção", max_length=12, choices=Secao.choices, unique=True)
     introducao = models.TextField("introdução", blank=True)
+    introducao_de = models.TextField("introdução — alemão", blank=True)
+    introducao_en = models.TextField("introdução — inglês", blank=True)
     texto = models.TextField(blank=True)
+    texto_de = models.TextField("texto — alemão", blank=True)
+    texto_en = models.TextField("texto — inglês", blank=True)
     imagem = models.ImageField(upload_to="paginas/", blank=True)
     imagem_alt = models.CharField("texto alternativo da imagem", max_length=180, blank=True)
     timelapse = models.FileField(
@@ -32,10 +45,14 @@ class Pagina(models.Model):
         return self.get_secao_display()
 
 
-class Ficha(models.Model):
+class Ficha(ConteudoTraduzivel):
     titulo = models.CharField("título", max_length=160)
+    titulo_de = models.CharField("título — alemão", max_length=160, blank=True)
+    titulo_en = models.CharField("título — inglês", max_length=160, blank=True)
     slug = models.SlugField("identificador no endereço", max_length=160, unique=True)
     resumo = models.TextField(blank=True)
+    resumo_de = models.TextField("resumo — alemão", blank=True)
+    resumo_en = models.TextField("resumo — inglês", blank=True)
     imagem = models.ImageField(upload_to="fichas/", blank=True)
     imagem_alt = models.CharField("texto alternativo da imagem", max_length=180, blank=True)
     ordem = models.PositiveIntegerField(default=0)
@@ -51,6 +68,8 @@ class Ficha(models.Model):
 
 class Artigo(Ficha):
     texto = models.TextField(blank=True)
+    texto_de = models.TextField("texto — alemão", blank=True)
+    texto_en = models.TextField("texto — inglês", blank=True)
 
     def get_absolute_url(self):
         return reverse("editorial:artigo", kwargs={"slug": self.slug})
