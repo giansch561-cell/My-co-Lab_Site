@@ -168,3 +168,14 @@ msgstr "Nächste geplante Aufnahme"
 
 msgid "À espera da próxima fotografia."
 msgstr "Warten auf das nächste Foto."
+
+msgid ""
+"Aprende a montar a tua GrowBox por módulos, com guias sobre câmara e "
+"timelapse, sensores, ventilação e humidificação."
+msgstr ""
+"Hier lernst du, wie du deine GrowBox Schritt für Schritt aufbaust. Die "
+"Anleitungen behandeln Kamera und Zeitraffer, Sensoren, Belüftung und "
+"Befeuchtung."
+
+msgid "Os primeiros guias estão em preparação."
+msgstr "Die ersten Anleitungen sind in Vorbereitung."

@@ -1,0 +1,15 @@
+{% extends 'editorial/catalogo.html' %}
+{% load i18n %}
+
+{% block introducao %}
+    <div class="leitura">
+        <p>{% translate "Aprende a montar a tua GrowBox por módulos, com guias sobre câmara e timelapse, sensores, ventilação e humidificação." %}</p>
+    </div>
+{% endblock %}
+
+{% block catalogo_vazio %}
+    <div class="leitura">
+        <p>{% translate "Os primeiros guias estão em preparação." %}</p>
+        <a href="{% url 'editorial:mycobox' %}">{% translate "Conhecer o projeto GrowBox" %}</a>
+    </div>
+{% endblock %}

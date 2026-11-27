@@ -79,6 +79,22 @@ class IdiomasTest(TestCase):
 
 
 class PaginaInicialTest(TestCase):
+    def test_growbox_apresenta_o_projeto_enquanto_nao_ha_guias(self):
+        GuiaGrowBox.objects.create(titulo="Guia em rascunho", slug="rascunho")
+        for prefixo, aviso in (
+            ("", "Os primeiros guias estão em preparação."),
+            ("/de", "Die ersten Anleitungen sind in Vorbereitung."),
+            ("/en", "The first guides are in preparation."),
+        ):
+            with self.subTest(prefixo=prefixo):
+                inicio = self.client.get(f"{prefixo}/")
+                self.assertContains(inicio, f'class="cartao" href="{prefixo}/growbox/"')
+                catalogo = self.client.get(f"{prefixo}/growbox/")
+                self.assertContains(catalogo, "<h1>GrowBox</h1>")
+                self.assertContains(catalogo, aviso)
+                self.assertContains(catalogo, f'href="{prefixo}/mycobox/"')
+                self.assertNotContains(catalogo, "Guia em rascunho")
+
     def test_ficha_growbox_leva_ao_catalogo_e_ao_guia_traduzido(self):
         guia = GuiaGrowBox.objects.create(
             titulo="Câmara e timelapse",
@@ -95,6 +111,8 @@ class PaginaInicialTest(TestCase):
         self.assertContains(self.client.get("/mycobox/"), 'href="/growbox/"')
         catalogo = self.client.get("/en/growbox/")
         self.assertContains(catalogo, "<h1>GrowBox</h1>")
+        self.assertContains(catalogo, "Learn how to build your GrowBox")
+        self.assertNotContains(catalogo, "The first guides are in preparation.")
         self.assertContains(catalogo, "Camera and time-lapse")
         self.assertContains(catalogo, 'href="/en/growbox/camara-e-timelapse/"')
         ficha = self.client.get("/en/growbox/camara-e-timelapse/")

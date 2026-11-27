@@ -57,6 +57,7 @@ urlpatterns = [
         "growbox/",
         views.CatalogoView.as_view(
             queryset=guias_growbox,
+            template_name="editorial/growbox.html",
             extra_context={"titulo": "GrowBox", "secao": "growbox"},
         ),
         name="growbox",
