@@ -13,18 +13,18 @@ def inicio(request):
         (Pagina.Secao.ARTIGOS, "editorial:artigos"),
         (Pagina.Secao.CULTIVO, "editorial:cultivo"),
         (Pagina.Secao.COGUMELOS, "editorial:cogumelos"),
-        (Pagina.Secao.GROWBOX, "editorial:growbox"),
     )
     paginas = Pagina.objects.in_bulk(field_name="secao")
     cartoes = [
-        {
-            "titulo": secao.label,
-            "rota": rota,
-            "pagina": paginas.get(secao),
-            "imagem_padrao": "editorial/growbox.webp" if secao == Pagina.Secao.GROWBOX else "",
-        }
+        {"titulo": secao.label, "rota": rota, "pagina": paginas.get(secao)}
         for secao, rota in secoes
     ]
+    cartoes.append({
+        "titulo": Pagina.Secao.MYCOBOX.label,
+        "rota": "editorial:mycobox",
+        "pagina": paginas.get(Pagina.Secao.GROWBOX),
+        "imagem_padrao": "editorial/growbox.webp",
+    })
     recentes = []
     for modelo in (Artigo, Cogumelo, MetodoCultivo, GuiaGrowBox):
         recentes.extend(

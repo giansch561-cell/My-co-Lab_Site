@@ -79,6 +79,20 @@ class IdiomasTest(TestCase):
 
 
 class PaginaInicialTest(TestCase):
+    def test_ficha_mycobox_no_inicio_abre_a_pagina_das_experiencias(self):
+        for prefixo in ("", "/de", "/en"):
+            with self.subTest(prefixo=prefixo):
+                inicio = self.client.get(f"{prefixo}/")
+                self.assertContains(inicio, 'class="cartao"', count=4)
+                self.assertContains(inicio, f'class="cartao" href="{prefixo}/mycobox/"')
+                self.assertContains(inicio, '<span class="cartao-titulo">MycoBox</span>')
+                self.assertContains(inicio, "/static/editorial/growbox.webp")
+                self.assertNotContains(inicio, f'class="cartao" href="{prefixo}/growbox/"')
+
+                mycobox = self.client.get(f"{prefixo}/mycobox/")
+                for caminho in ("mycobox/timelapses/", "mycobox/live/", "growbox/"):
+                    self.assertContains(mycobox, f'href="{prefixo}/{caminho}"')
+
     def test_growbox_apresenta_o_projeto_enquanto_nao_ha_guias(self):
         GuiaGrowBox.objects.create(titulo="Guia em rascunho", slug="rascunho")
         for prefixo, aviso in (
@@ -87,15 +101,13 @@ class PaginaInicialTest(TestCase):
             ("/en", "The first guides are in preparation."),
         ):
             with self.subTest(prefixo=prefixo):
-                inicio = self.client.get(f"{prefixo}/")
-                self.assertContains(inicio, f'class="cartao" href="{prefixo}/growbox/"')
                 catalogo = self.client.get(f"{prefixo}/growbox/")
                 self.assertContains(catalogo, "<h1>GrowBox</h1>")
                 self.assertContains(catalogo, aviso)
                 self.assertContains(catalogo, f'href="{prefixo}/mycobox/"')
                 self.assertNotContains(catalogo, "Guia em rascunho")
 
-    def test_ficha_growbox_leva_ao_catalogo_e_ao_guia_traduzido(self):
+    def test_catalogo_growbox_leva_ao_guia_traduzido(self):
         guia = GuiaGrowBox.objects.create(
             titulo="Câmara e timelapse",
             titulo_en="Camera and time-lapse",
@@ -104,11 +116,6 @@ class PaginaInicialTest(TestCase):
             preco="9 CHF",
             url_compra="https://example.org/guia",
         )
-        inicio = self.client.get("/")
-        self.assertContains(inicio, 'class="cartao"', count=4)
-        self.assertContains(inicio, 'href="/growbox/"')
-        self.assertContains(inicio, "/static/editorial/growbox.webp")
-        self.assertContains(self.client.get("/mycobox/"), 'href="/growbox/"')
         catalogo = self.client.get("/en/growbox/")
         self.assertContains(catalogo, "<h1>GrowBox</h1>")
         self.assertContains(catalogo, "Learn how to build your GrowBox")
