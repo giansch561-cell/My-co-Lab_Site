@@ -8,6 +8,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from PIL import Image
 
+from .live import registar_fotografia
 from .models import Artigo, Cogumelo, GuiaGrowBox, MetodoCultivo, Pagina, Timelapse
 
 
@@ -166,7 +167,7 @@ class MycoBoxTest(TestCase):
             with self.settings(MYCOLAB_LIVE_PHOTO=foto, MYCOLAB_LIVE_READINGS=base):
                 pagina = self.client.get("/mycobox/live/")
                 self.assertContains(pagina, "Ainda não há uma fotografia disponível.")
-                self.assertContains(pagina, "Ainda não há medições disponíveis.")
+                self.assertContains(pagina, "Há leituras por receber.")
                 self.assertEqual(self.client.get("/mycobox/live/foto/").status_code, 404)
                 self.assertFalse(base.exists())
 
@@ -207,3 +208,43 @@ class MycoBoxTest(TestCase):
                 caixa = self.client.get("/en/mycobox/")
                 self.assertContains(caixa, 'src="/en/mycobox/live/foto/?v=1795756440000000000"')
             db.close()
+
+    def test_painel_exterior_graficos_e_intervalo_entre_fotografias(self):
+        inicio = datetime.now(timezone.utc).replace(microsecond=0) - timedelta(minutes=10)
+        with TemporaryDirectory() as pasta:
+            foto = Path(pasta) / "latest.jpg"
+            base = Path(pasta) / "montra.sqlite3"
+            Image.new("RGB", (2, 2)).save(foto)
+            with sqlite3.connect(base) as db:
+                db.execute(
+                    "CREATE TABLE projects_growboxreading (id INTEGER PRIMARY KEY, measured_at TEXT,"
+                    " temperature_c REAL, humidity_percent REAL, external_temperature_c REAL,"
+                    " external_humidity_percent REAL, fan_on BOOLEAN, humidifier_on BOOLEAN)"
+                )
+                for minuto, ventoinha, humidificador in ((0, 0, 0), (1, 1, 0), (2, 1, 1), (3, 0, 0)):
+                    instante = inicio + timedelta(minutes=minuto)
+                    db.execute(
+                        "INSERT INTO projects_growboxreading VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                        (
+                            minuto + 1, instante.replace(tzinfo=None).isoformat(sep=" "),
+                            20.5, 80.9, 12.3, 49.7, ventoinha, humidificador,
+                        ),
+                    )
+            db.close()
+            with self.settings(MYCOLAB_LIVE_PHOTO=foto, MYCOLAB_LIVE_READINGS=base):
+                capturas = (inicio, inicio + timedelta(minutes=3))
+                for captura in capturas:
+                    os.utime(foto, (captura.timestamp(), captura.timestamp()))
+                    registar_fotografia()
+                registar_fotografia()
+                painel = self.client.get("/en/mycobox/live/")
+                self.assertContains(painel, "12.3 °C")
+                self.assertContains(painel, "49.7 %")
+                self.assertContains(painel, "Next refresh")
+                self.assertContains(painel, "00:02:00")
+                self.assertContains(painel, "00:01:00")
+                self.assertNotContains(painel, "partial record")
+                self.assertContains(painel, "Last 24 hours")
+                self.assertContains(painel, 'data-live-grafico="temperatura"')
+                self.assertContains(painel, 'data-live-grafico="humidade"')
+                self.assertContains(painel, 'id="live-historico-dados"')

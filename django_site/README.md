@@ -53,12 +53,26 @@ A página **Timelapses** apresenta o vídeo da primeira colheita, quando já
 carregado em **Páginas → MycoBox**, e os vídeos acrescentados em **Timelapses**.
 
 A página **Live** verifica a cada minuto se chegaram uma nova fotografia ou uma
-nova medição. Apresenta a hora de captura e a hora da leitura em separado.
+nova medição. O contador mostra o tempo até essa verificação. Apresenta a hora
+de captura e a hora da leitura em separado e gráficos das últimas 24 horas
+com médias de 5 minutos.
 No Raspberry Pi, reutiliza a fotografia que a Montra Digital recebe em
 `~/.local/share/mycolab-growbox/latest.jpg` e lê a tabela
 `projects_growboxreading` de `~/montra-digital/db.sqlite3` em modo só de leitura.
 Para caminhos diferentes, define `MYCOLAB_LIVE_PHOTO` e
 `MYCOLAB_LIVE_READINGS` no ambiente do serviço.
+
+No `myco-site`, os ficheiros `deploy/mycolab-live-photo.path` e
+`deploy/mycolab-live-photo.service` guardam as horas das últimas duas fotografias.
+Depois de instalar os dois em `/etc/systemd/system/`, recarrega o systemd e ativa
+`mycolab-live-photo.path`. Executa `mycolab-live-photo.service` uma vez para
+registar a fotografia que já lá estiver.
+
+Para calcular os tempos de ventilação e humidificação, o painel usa o estado
+registado até à medição seguinte. Intervalos de mais de dois minutos entre
+medições ficam fora da estimativa e são assinalados como registo parcial.
+As leituras exteriores aparecem quando a base de dados que recebe as medições
+inclui `external_temperature_c` e `external_humidity_percent`.
 
 O servidor `runserver` serve a prévia local. A publicação tem configuração
 própria. Se desativares a prévia com `DJANGO_DEBUG=0`, define

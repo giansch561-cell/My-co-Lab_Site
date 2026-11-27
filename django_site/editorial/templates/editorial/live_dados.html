@@ -1,33 +1,83 @@
 {% load i18n %}
-<figure class="live-fotografia">
-    {% if foto %}
-        <img src="{% url 'editorial:live_foto' %}?v={{ foto.versao }}" alt="{% translate 'Última fotografia do interior da GrowBox' %}">
-        <figcaption>
-            {% translate "Fotografia de" %}
-            <time datetime="{{ foto.capturada_em|date:'c' }}">{{ foto.capturada_em|date:"SHORT_DATETIME_FORMAT" }}</time>
-        </figcaption>
-    {% else %}
-        <p>{% translate "Ainda não há uma fotografia disponível." %}</p>
-    {% endif %}
-</figure>
-<section class="live-medicoes">
-    <h2>{% translate "Condições na GrowBox" %}</h2>
-    {% if leitura %}
-        <dl>
-            <div>
-                <dt>{% translate "Temperatura" %}</dt>
-                <dd>{{ leitura.temperatura|floatformat:1 }} °C</dd>
-            </div>
-            <div>
-                <dt>{% translate "Humidade" %}</dt>
-                <dd>{{ leitura.humidade|floatformat:1 }} %</dd>
-            </div>
-        </dl>
-        <p>
-            {% translate "Medição de" %}
-            <time datetime="{{ leitura.medida_em|date:'c' }}">{{ leitura.medida_em|date:"SHORT_DATETIME_FORMAT" }}</time>
+<div class="live-painel">
+    <section class="live-medicoes live-interior">
+        <h2>{% translate "Interior" %}</h2>
+        {% include 'editorial/live_medicoes.html' with temperatura=leitura.temperatura humidade=leitura.humidade only %}
+        {% if leitura.medida_em %}
+            <p>
+                {% translate "Medição de" %}
+                <time datetime="{{ leitura.medida_em|date:'c' }}">{{ leitura.medida_em|date:"SHORT_DATETIME_FORMAT" }}</time>
+            </p>
+        {% endif %}
+        <p class="live-contador">
+            {% translate "Próxima atualização" %}
+            <span data-live-contador>01:00</span>
         </p>
+    </section>
+
+    <figure class="live-fotografia">
+        {% if foto %}
+            <img src="{% url 'editorial:live_foto' %}?v={{ foto.versao }}" alt="{% translate 'Última fotografia do interior da GrowBox' %}">
+            <figcaption>
+                {% translate "Fotografia de" %}
+                <time datetime="{{ foto.capturada_em|date:'c' }}">{{ foto.capturada_em|date:"SHORT_DATETIME_FORMAT" }}</time>
+            </figcaption>
+        {% else %}
+            <p>{% translate "Ainda não há uma fotografia disponível." %}</p>
+        {% endif %}
+    </figure>
+
+    <div class="live-exterior">
+        <section class="live-medicoes">
+            <h2>{% translate "Exterior" %}</h2>
+            {% include 'editorial/live_medicoes.html' with temperatura=leitura.temperatura_exterior humidade=leitura.humidade_exterior only %}
+        </section>
+        <section class="live-reles">
+            <h2>{% translate "Entre as duas fotografias" %}</h2>
+            {% if foto_anterior %}
+                <p>
+                    <time datetime="{{ foto_anterior|date:'c' }}">{{ foto_anterior|date:"SHORT_DATETIME_FORMAT" }}</time>
+                    →
+                    <time datetime="{{ foto.capturada_em|date:'c' }}">{{ foto.capturada_em|date:"SHORT_DATETIME_FORMAT" }}</time>
+                </p>
+                <p>{% translate "Tempo ligado, estimado a partir das medições." %}</p>
+                <dl>
+                    <div>
+                        <dt>{% translate "Ventilação" %}</dt>
+                        <dd>{% include 'editorial/live_duracao.html' with rele=reles.0 only %}</dd>
+                    </div>
+                    <div>
+                        <dt>{% translate "Humidificação" %}</dt>
+                        <dd>{% include 'editorial/live_duracao.html' with rele=reles.1 only %}</dd>
+                    </div>
+                </dl>
+            {% else %}
+                <p>{% translate "À espera de duas fotografias registadas." %}</p>
+            {% endif %}
+        </section>
+    </div>
+</div>
+
+<section class="live-historico">
+    <h2>{% translate "Últimas 24 h" %}</h2>
+    {% if historico %}
+        <p>{% translate "Médias de 5 minutos." %}</p>
+        <ul class="live-legenda">
+            <li>{% translate "Interior" %}</li>
+            <li>{% translate "Exterior" %}</li>
+        </ul>
+        <div class="live-graficos">
+            <section>
+                <h3>{% translate "Temperatura" %} (°C)</h3>
+                <canvas data-live-grafico="temperatura" role="img" aria-label="{% translate 'Gráfico de temperatura interior e exterior' %}"></canvas>
+            </section>
+            <section>
+                <h3>{% translate "Humidade" %} (%)</h3>
+                <canvas data-live-grafico="humidade" role="img" aria-label="{% translate 'Gráfico de humidade interior e exterior' %}"></canvas>
+            </section>
+        </div>
+        {{ historico|json_script:"live-historico-dados" }}
     {% else %}
-        <p>{% translate "Ainda não há medições disponíveis." %}</p>
+        <p>{% translate "Ainda não há medições nas últimas 24 h." %}</p>
     {% endif %}
 </section>

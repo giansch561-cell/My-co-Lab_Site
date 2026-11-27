@@ -1,0 +1,6 @@
+{% load i18n %}
+{% if rele %}
+    {{ rele.duracao }}{% if rele.parcial %} · {% translate "registo parcial" %}{% endif %}
+{% else %}
+    {% translate "Sem registos suficientes" %}
+{% endif %}

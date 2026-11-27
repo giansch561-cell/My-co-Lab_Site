@@ -110,9 +110,6 @@ msgstr "Photo from"
 msgid "Ainda não há uma fotografia disponível."
 msgstr "There is no photo available yet."
 
-msgid "Condições na GrowBox"
-msgstr "Conditions in the GrowBox"
-
 msgid "Temperatura"
 msgstr "Temperature"
 
@@ -122,5 +119,50 @@ msgstr "Humidity"
 msgid "Medição de"
 msgstr "Reading from"
 
-msgid "Ainda não há medições disponíveis."
-msgstr "There are no readings available yet."
+msgid "Interior"
+msgstr "Inside"
+
+msgid "Exterior"
+msgstr "Outside"
+
+msgid "Próxima atualização"
+msgstr "Next refresh"
+
+msgid "Entre as duas fotografias"
+msgstr "Between the last two photos"
+
+msgid "Tempo ligado, estimado a partir das medições."
+msgstr "Runtime estimated from readings."
+
+msgid "Ventilação"
+msgstr "Ventilation"
+
+msgid "Humidificação"
+msgstr "Humidification"
+
+msgid "À espera de duas fotografias registadas."
+msgstr "Waiting for two recorded photos."
+
+msgid "Últimas 24 h"
+msgstr "Last 24 hours"
+
+msgid "Médias de 5 minutos."
+msgstr "5-minute averages."
+
+msgid "Gráfico de temperatura interior e exterior"
+msgstr "Inside and outside temperature chart"
+
+msgid "Gráfico de humidade interior e exterior"
+msgstr "Inside and outside humidity chart"
+
+msgid "Ainda não há medições nas últimas 24 h."
+msgstr "No readings in the last 24 hours."
+
+msgid "Há leituras por receber."
+msgstr "Waiting for readings."
+
+msgid "registo parcial"
+msgstr "partial record"
+
+msgid "Sem registos suficientes"
+msgstr "Not enough readings"

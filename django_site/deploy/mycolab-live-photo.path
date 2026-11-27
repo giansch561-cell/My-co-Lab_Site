@@ -1,0 +1,8 @@
+[Unit]
+Description=Deteta novas fotografias da GrowBox
+
+[Path]
+PathChanged=/home/reddevil/.local/share/mycolab-growbox/latest.jpg
+
+[Install]
+WantedBy=multi-user.target

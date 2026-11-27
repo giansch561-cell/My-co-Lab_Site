@@ -109,9 +109,6 @@ msgstr "Foto vom"
 msgid "Ainda não há uma fotografia disponível."
 msgstr "Es ist noch kein Foto verfügbar."
 
-msgid "Condições na GrowBox"
-msgstr "Bedingungen in der GrowBox"
-
 msgid "Temperatura"
 msgstr "Temperatur"
 
@@ -121,5 +118,50 @@ msgstr "Luftfeuchtigkeit"
 msgid "Medição de"
 msgstr "Messung vom"
 
-msgid "Ainda não há medições disponíveis."
-msgstr "Es sind noch keine Messwerte verfügbar."
+msgid "Interior"
+msgstr "Innen"
+
+msgid "Exterior"
+msgstr "Aussen"
+
+msgid "Próxima atualização"
+msgstr "Nächste Aktualisierung"
+
+msgid "Entre as duas fotografias"
+msgstr "Zwischen den beiden Fotos"
+
+msgid "Tempo ligado, estimado a partir das medições."
+msgstr "Laufzeit, aus Messwerten geschätzt."
+
+msgid "Ventilação"
+msgstr "Belüftung"
+
+msgid "Humidificação"
+msgstr "Befeuchtung"
+
+msgid "À espera de duas fotografias registadas."
+msgstr "Warten auf zwei erfasste Fotos."
+
+msgid "Últimas 24 h"
+msgstr "Letzte 24 Std."
+
+msgid "Médias de 5 minutos."
+msgstr "5-Minuten-Mittelwerte."
+
+msgid "Gráfico de temperatura interior e exterior"
+msgstr "Temperaturdiagramm innen und aussen"
+
+msgid "Gráfico de humidade interior e exterior"
+msgstr "Luftfeuchtigkeitsdiagramm innen und aussen"
+
+msgid "Ainda não há medições nas últimas 24 h."
+msgstr "Keine Messwerte in den letzten 24 Stunden."
+
+msgid "Há leituras por receber."
+msgstr "Es fehlen noch Messwerte."
+
+msgid "registo parcial"
+msgstr "Teilerfassung"
+
+msgid "Sem registos suficientes"
+msgstr "Zu wenige Messwerte"

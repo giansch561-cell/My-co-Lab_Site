@@ -1,0 +1,8 @@
+[Unit]
+Description=Regista a hora da fotografia da GrowBox
+
+[Service]
+Type=oneshot
+User=reddevil
+WorkingDirectory=/home/reddevil/myco-lab-site-django/django_site
+ExecStart=/home/reddevil/myco-lab-site-django/django_site/.venv/bin/python manage.py registar_fotografia_live

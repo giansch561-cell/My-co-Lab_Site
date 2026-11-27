@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.decorators.cache import cache_control, never_cache
 from django.views.generic import DetailView, ListView
 
-from .live import ultima_fotografia, ultima_medicao
+from .live import estado_live, ultima_fotografia
 from .models import Artigo, Cogumelo, Fonte, GuiaGrowBox, MetodoCultivo, Pagina, Timelapse
 
 
@@ -84,7 +84,7 @@ def live(request, parcial=False):
     return render(
         request,
         modelo,
-        {"secao": "mycobox", "foto": ultima_fotografia(), "leitura": ultima_medicao()},
+        {"secao": "mycobox", **estado_live()},
     )
 
 

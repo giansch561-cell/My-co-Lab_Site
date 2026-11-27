@@ -1,0 +1,14 @@
+{% load i18n %}
+<dl>
+    <div>
+        <dt>{% translate "Temperatura" %}</dt>
+        <dd>{% if temperatura is not None and temperatura != "" %}{{ temperatura|floatformat:1 }} °C{% else %}—{% endif %}</dd>
+    </div>
+    <div>
+        <dt>{% translate "Humidade" %}</dt>
+        <dd>{% if humidade is not None and humidade != "" %}{{ humidade|floatformat:1 }} %{% else %}—{% endif %}</dd>
+    </div>
+</dl>
+{% if temperatura is None or temperatura == "" or humidade is None or humidade == "" %}
+    <p>{% translate "Há leituras por receber." %}</p>
+{% endif %}
