@@ -211,3 +211,6 @@ msgid "Mãos de um adulto e de uma criança a colher shiitake de troncos."
 msgstr ""
 "Hände eines Erwachsenen und eines Kindes bei der Ernte von Shiitake auf "
 "Holzstämmen."
+
+msgid "Ilustração de uma GrowBox com cogumelos-ostra, câmara e sensor."
+msgstr "Illustration einer GrowBox mit Austernpilzen, Kamera und Sensor."

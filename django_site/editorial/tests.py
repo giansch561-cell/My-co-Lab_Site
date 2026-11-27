@@ -120,15 +120,18 @@ class PaginaInicialTest(TestCase):
 
     def test_growbox_apresenta_o_projeto_enquanto_nao_ha_guias(self):
         GuiaGrowBox.objects.create(titulo="Guia em rascunho", slug="rascunho")
-        for prefixo, aviso in (
-            ("", "Os primeiros guias estão em preparação."),
-            ("/de", "Die ersten Anleitungen sind in Vorbereitung."),
-            ("/en", "The first guides are in preparation."),
+        for prefixo, introducao, aviso in (
+            ("", "Aprende a montar a tua GrowBox", "Os primeiros guias estão em preparação."),
+            ("/de", "Hier lernst du, wie du deine GrowBox", "Die ersten Anleitungen sind in Vorbereitung."),
+            ("/en", "Learn how to build your GrowBox", "The first guides are in preparation."),
         ):
             with self.subTest(prefixo=prefixo):
                 catalogo = self.client.get(f"{prefixo}/growbox/")
                 self.assertContains(catalogo, "<h1>GrowBox</h1>")
-                self.assertContains(catalogo, aviso)
+                abertura, corpo = catalogo.content.decode().split("</section>", 1)
+                self.assertIn(introducao, abertura)
+                self.assertIn('src="/static/editorial/abertura-growbox.webp"', abertura)
+                self.assertIn(aviso, corpo)
                 self.assertContains(catalogo, f'href="{prefixo}/mycobox/"')
                 self.assertNotContains(catalogo, "Guia em rascunho")
 
@@ -145,8 +148,10 @@ class PaginaInicialTest(TestCase):
         self.assertContains(catalogo, "<h1>GrowBox</h1>")
         self.assertContains(catalogo, "Learn how to build your GrowBox")
         self.assertNotContains(catalogo, "The first guides are in preparation.")
-        self.assertContains(catalogo, "Camera and time-lapse")
-        self.assertContains(catalogo, 'href="/en/growbox/camara-e-timelapse/"')
+        _, fichas = catalogo.content.decode().split("</section>", 1)
+        self.assertIn('<ul class="grelha">', fichas)
+        self.assertIn("Camera and time-lapse", fichas)
+        self.assertIn('href="/en/growbox/camara-e-timelapse/"', fichas)
         ficha = self.client.get("/en/growbox/camara-e-timelapse/")
         self.assertContains(ficha, "Buy the PDF guide")
         guia.publicado = False

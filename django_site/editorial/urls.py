@@ -90,7 +90,19 @@ urlpatterns = [
         views.CatalogoView.as_view(
             queryset=guias_growbox,
             template_name="editorial/growbox.html",
-            extra_context={"titulo": "GrowBox", "secao": "growbox"},
+            secao_pagina=Pagina.Secao.GROWBOX,
+            extra_context={
+                "titulo": "GrowBox",
+                "secao": "growbox",
+                "introducao_padrao": _(
+                    "Aprende a montar a tua GrowBox por módulos, com guias sobre "
+                    "câmara e timelapse, sensores, ventilação e humidificação."
+                ),
+                "imagem_padrao": "editorial/abertura-growbox.webp",
+                "imagem_alt_padrao": _(
+                    "Ilustração de uma GrowBox com cogumelos-ostra, câmara e sensor."
+                ),
+            },
         ),
         name="growbox",
     ),
