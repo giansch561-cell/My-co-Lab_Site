@@ -2,21 +2,26 @@
 {% load static i18n idiomas %}
 {% block titulo %}{{ titulo }} | My-co-Lab{% endblock %}
 {% block conteudo %}
-    <section class="{% if pagina.imagem or imagem_padrao %}abertura{% else %}leitura{% endif %}">
-        <div class="abertura-texto">
-            <h1>{{ titulo }}</h1>
-            {% with introducao=pagina|texto_localizado:"introducao" %}
-                {% if introducao %}<div class="introducao">{{ introducao|linebreaks }}</div>{% endif %}
-            {% endwith %}
-        </div>
-        {% if pagina.imagem %}
-            <img class="abertura-imagem" src="{{ pagina.imagem.url }}" alt="{{ pagina|texto_localizado:'imagem_alt' }}">
-        {% elif imagem_padrao %}
-            <img class="abertura-imagem" src="{% static imagem_padrao %}" width="1400" height="933" alt="{% translate 'Esboço dos cogumelos-ostra a crescer no bloco de cultivo, dentro da GrowBox.' %}">
-        {% endif %}
-    </section>
     {% with texto=pagina|texto_localizado:"texto" %}
-        {% if texto %}<div class="leitura">{{ texto|linebreaks }}</div>{% endif %}
+        <section class="{% if pagina.imagem or imagem_padrao %}abertura{% if secao == 'sobre' %} abertura-sobre{% endif %}{% else %}leitura{% endif %}">
+            <div class="abertura-texto">
+                <h1>{{ titulo }}</h1>
+                {% with introducao=pagina|texto_localizado:"introducao" %}
+                    {% if introducao %}<div class="introducao">{{ introducao|linebreaks }}</div>{% endif %}
+                {% endwith %}
+                {% if secao == 'sobre' and texto %}
+                    <div class="leitura">{{ texto|linebreaks }}</div>
+                {% endif %}
+            </div>
+            {% if pagina.imagem %}
+                <img class="abertura-imagem" src="{{ pagina.imagem.url }}" alt="{{ pagina|texto_localizado:'imagem_alt' }}">
+            {% elif imagem_padrao %}
+                <img class="abertura-imagem" src="{% static imagem_padrao %}" width="1400" height="933" alt="{% translate 'Esboço dos cogumelos-ostra a crescer no bloco de cultivo, dentro da GrowBox.' %}">
+            {% endif %}
+        </section>
+        {% if secao != 'sobre' and texto %}
+            <div class="leitura">{{ texto|linebreaks }}</div>
+        {% endif %}
     {% endwith %}
     {% if secao == 'mycobox' %}
         <ul class="grelha grelha-mycobox">

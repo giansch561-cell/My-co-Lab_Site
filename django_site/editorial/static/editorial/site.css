@@ -177,6 +177,10 @@ h2 {
     gap: clamp(1.25rem, 3vw, 4rem);
 }
 
+.abertura-sobre {
+    align-items: start;
+}
+
 .abertura-imagem {
     aspect-ratio: 3 / 2;
     height: auto;

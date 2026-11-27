@@ -77,6 +77,27 @@ class IdiomasTest(TestCase):
                 self.assertContains(pagina, f'name="{campo}_de"')
                 self.assertContains(pagina, f'name="{campo}_en"')
 
+    def test_sobre_mostra_o_texto_na_coluna_do_titulo_ao_lado_da_imagem(self):
+        Pagina.objects.create(
+            secao=Pagina.Secao.SOBRE,
+            texto="A minha história.",
+            texto_de="Meine Geschichte.",
+            texto_en="My story.",
+            imagem="paginas/sobre.webp",
+        )
+        for prefixo, texto in (
+            ("", "A minha história."),
+            ("/de", "Meine Geschichte."),
+            ("/en", "My story."),
+        ):
+            with self.subTest(prefixo=prefixo):
+                resposta = self.client.get(f"{prefixo}/sobre/")
+                self.assertContains(resposta, texto, count=1)
+                abertura = resposta.content.decode().split('<section class="abertura abertura-sobre">', 1)[1]
+                coluna, imagem = abertura.split('<img class="abertura-imagem"', 1)
+                self.assertIn(f'<div class="leitura"><p>{texto}</p></div>', coluna)
+                self.assertIn('src="/media/paginas/sobre.webp"', imagem)
+
 
 class PaginaInicialTest(TestCase):
     def test_ficha_mycobox_no_inicio_abre_a_pagina_das_experiencias(self):
