@@ -234,6 +234,21 @@ class CatalogoAberturaTest(TestCase):
                 self.assertIn('<ul class="grelha">', fichas)
                 self.assertIn('src="/media/esbocos/cogumelo-ostra.webp"', fichas)
 
+    def test_catalogo_cultivo_mostra_introducao_traduzida_e_imagem_acima_dos_metodos(self):
+        MetodoCultivo.objects.create(titulo="Cultivo em saco", slug="em-saco", publicado=True)
+        for prefixo, frase in (
+            ("", "Descobre diferentes formas de cultivar cogumelos."),
+            ("/de", "Entdecke verschiedene Möglichkeiten, Pilze anzubauen."),
+            ("/en", "Discover different ways to grow mushrooms."),
+        ):
+            with self.subTest(prefixo=prefixo):
+                pagina = self.client.get(f"{prefixo}/cultivo/")
+                self.assertContains(pagina, f'href="{prefixo}/cultivo/em-saco/"')
+                abertura, fichas = pagina.content.decode().split("</section>", 1)
+                self.assertIn(frase, abertura)
+                self.assertIn('src="/static/editorial/abertura-cultivo.webp"', abertura)
+                self.assertIn('<ul class="grelha">', fichas)
+
     def test_abertura_usa_introducao_e_imagem_guardadas(self):
         Pagina.objects.create(
             secao=Pagina.Secao.ARTIGOS,

@@ -65,7 +65,18 @@ urlpatterns = [
         "cultivo/",
         views.CatalogoView.as_view(
             queryset=metodos,
-            extra_context={"titulo": _("Cultivo"), "secao": "cultivo"},
+            template_name="editorial/catalogo_abertura.html",
+            secao_pagina=Pagina.Secao.CULTIVO,
+            extra_context={
+                "titulo": _("Cultivo"),
+                "secao": "cultivo",
+                "introducao_padrao": _(
+                    "Descobre diferentes formas de cultivar cogumelos. "
+                    "Em cada ficha encontras uma breve explicação do método."
+                ),
+                "imagem_padrao": "editorial/abertura-cultivo.webp",
+                "imagem_alt_padrao": _("Mãos de um adulto e de uma criança a colher shiitake de troncos."),
+            },
         ),
         name="cultivo",
     ),
