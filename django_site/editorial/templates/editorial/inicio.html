@@ -7,7 +7,7 @@
             {% with introducao=pagina|texto_localizado:"introducao" %}
                 {% if introducao %}<div class="introducao">{{ introducao|linebreaks }}</div>{% endif %}
             {% endwith %}
-            <a class="botao" href="{% url 'editorial:mycobox' %}">{% translate "Conhecer o projeto GrowBox" %}</a>
+            <a class="botao" href="{% url 'editorial:sobre' %}">{% translate "Como tudo começou" %}</a>
         </div>
         {% if pagina.imagem %}
             <img class="abertura-imagem" src="{{ pagina.imagem.url }}" alt="{{ pagina|texto_localizado:'imagem_alt' }}" fetchpriority="high">

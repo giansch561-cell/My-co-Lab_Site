@@ -15,18 +15,22 @@ from .models import Artigo, Cogumelo, GuiaGrowBox, MetodoCultivo, Pagina, Timela
 class IdiomasTest(TestCase):
     def test_paginas_e_navegacao_em_tres_idiomas(self):
         traducoes = (
-            ("", "pt-pt", "Cogumelos"),
-            ("/de", "de", "Pilze"),
-            ("/en", "en", "Mushrooms"),
+            ("", "pt-pt", "Cogumelos", "Como tudo começou"),
+            ("/de", "de", "Pilze", "Wie alles begann"),
+            ("/en", "en", "Mushrooms", "How it all began"),
         )
-        for prefixo, idioma, titulo in traducoes:
+        for prefixo, idioma, titulo, titulo_sobre in traducoes:
             with self.subTest(idioma=idioma):
                 inicio = self.client.get(prefixo + "/")
                 self.assertContains(inicio, f'href="{prefixo}/cogumelos/"')
+                self.assertContains(
+                    inicio,
+                    f'<a class="botao" href="{prefixo}/sobre/">{titulo_sobre}</a>',
+                )
                 pagina = self.client.get(prefixo + "/cogumelos/")
                 self.assertEqual(pagina.headers["Content-Language"], idioma)
                 self.assertContains(pagina, f"<h1>{titulo}</h1>")
-                for destino, codigo, _ in traducoes:
+                for destino, codigo, _, _ in traducoes:
                     self.assertContains(pagina, f'href="{destino}/cogumelos/" hreflang="{codigo}"')
 
     def test_seletor_conserva_ficha_e_pagina_do_catalogo(self):
