@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
-from .models import Fonte, Pagina
+from .models import Artigo, Cogumelo, Fonte, GuiaGrowBox, MetodoCultivo, Pagina
 
 
 def inicio(request):
@@ -9,16 +9,34 @@ def inicio(request):
         (Pagina.Secao.ARTIGOS, "editorial:artigos"),
         (Pagina.Secao.CULTIVO, "editorial:cultivo"),
         (Pagina.Secao.COGUMELOS, "editorial:cogumelos"),
+        (Pagina.Secao.GROWBOX, "editorial:growbox"),
     )
     paginas = Pagina.objects.in_bulk(field_name="secao")
     cartoes = [
-        {"titulo": secao.label, "rota": rota, "pagina": paginas.get(secao)}
+        {
+            "titulo": secao.label,
+            "rota": rota,
+            "pagina": paginas.get(secao),
+            "imagem_padrao": "editorial/growbox.webp" if secao == Pagina.Secao.GROWBOX else "",
+        }
         for secao, rota in secoes
     ]
+    recentes = []
+    for modelo in (Artigo, Cogumelo, MetodoCultivo, GuiaGrowBox):
+        recentes.extend(
+            modelo.objects.filter(publicado=True, publicado_em__isnull=False)
+            .order_by("-publicado_em", "-pk")[:3]
+        )
+    recentes.sort(key=lambda ficha: ficha.publicado_em, reverse=True)
     return render(
         request,
         "editorial/inicio.html",
-        {"secao": "inicio", "pagina": paginas.get(Pagina.Secao.INICIO), "cartoes": cartoes},
+        {
+            "secao": "inicio",
+            "pagina": paginas.get(Pagina.Secao.INICIO),
+            "cartoes": cartoes,
+            "recentes": recentes[:3],
+        },
     )
 
 

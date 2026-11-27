@@ -1,6 +1,7 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 
@@ -20,6 +21,7 @@ class Pagina(ConteudoTraduzivel):
         COGUMELOS = "cogumelos", _("Cogumelos")
         CULTIVO = "cultivo", _("Cultivo")
         MYCOBOX = "mycobox", "MycoBox"
+        GROWBOX = "growbox", "GrowBox"
 
     secao = models.CharField("secção", max_length=12, choices=Secao.choices, unique=True)
     introducao = models.TextField("introdução", blank=True)
@@ -57,6 +59,12 @@ class Ficha(ConteudoTraduzivel):
     imagem_alt = models.CharField("texto alternativo da imagem", max_length=180, blank=True)
     ordem = models.PositiveIntegerField(default=0)
     publicado = models.BooleanField(default=False)
+    publicado_em = models.DateTimeField(
+        "data de publicação",
+        blank=True,
+        null=True,
+        help_text="Preenchida automaticamente na primeira publicação de uma ficha nova.",
+    )
 
     class Meta:
         abstract = True
@@ -64,6 +72,18 @@ class Ficha(ConteudoTraduzivel):
 
     def __str__(self):
         return self.titulo
+
+    def save(self, *args, **kwargs):
+        campos = kwargs.get("update_fields")
+        if self.publicado and self.publicado_em is None and (campos is None or "publicado" in campos):
+            estava_publicado = self.pk is not None and type(self).objects.using(
+                kwargs.get("using") or self._state.db
+            ).filter(pk=self.pk, publicado=True).exists()
+            if not estava_publicado:
+                self.publicado_em = timezone.now()
+                if campos is not None:
+                    kwargs["update_fields"] = {*campos, "publicado_em"}
+        super().save(*args, **kwargs)
 
 
 class Artigo(Ficha):
@@ -75,9 +95,15 @@ class Artigo(Ficha):
         return reverse("editorial:artigo", kwargs={"slug": self.slug})
 
 
-class MetodoCultivo(Ficha):
+class GuiaPago(Ficha):
     preco = models.CharField("preço do guia", max_length=30, blank=True)
     url_compra = models.URLField("ligação para compra", blank=True)
+
+    class Meta(Ficha.Meta):
+        abstract = True
+
+
+class MetodoCultivo(GuiaPago):
     mostrar_mycobox = models.BooleanField("incluir ligação para a MycoBox", default=False)
 
     class Meta(Ficha.Meta):
@@ -86,6 +112,15 @@ class MetodoCultivo(Ficha):
 
     def get_absolute_url(self):
         return reverse("editorial:metodo", kwargs={"slug": self.slug})
+
+
+class GuiaGrowBox(GuiaPago):
+    class Meta(GuiaPago.Meta):
+        verbose_name = "guia GrowBox"
+        verbose_name_plural = "guias GrowBox"
+
+    def get_absolute_url(self):
+        return reverse("editorial:guia_growbox", kwargs={"slug": self.slug})
 
 
 class Cogumelo(Ficha):

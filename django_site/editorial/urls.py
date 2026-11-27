@@ -2,13 +2,14 @@ from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
 from . import views
-from .models import Artigo, Cogumelo, MetodoCultivo
+from .models import Artigo, Cogumelo, GuiaGrowBox, MetodoCultivo
 
 app_name = "editorial"
 
 artigos = Artigo.objects.filter(publicado=True)
 cogumelos = Cogumelo.objects.filter(publicado=True).select_related("metodo_cultivo")
 metodos = MetodoCultivo.objects.filter(publicado=True)
+guias_growbox = GuiaGrowBox.objects.filter(publicado=True)
 
 urlpatterns = [
     path("", views.inicio, name="inicio"),
@@ -51,6 +52,19 @@ urlpatterns = [
         "cultivo/<slug:slug>/",
         views.FichaView.as_view(queryset=metodos, extra_context={"secao": "cultivo"}),
         name="metodo",
+    ),
+    path(
+        "growbox/",
+        views.CatalogoView.as_view(
+            queryset=guias_growbox,
+            extra_context={"titulo": "GrowBox", "secao": "growbox"},
+        ),
+        name="growbox",
+    ),
+    path(
+        "growbox/<slug:slug>/",
+        views.FichaView.as_view(queryset=guias_growbox, extra_context={"secao": "growbox"}),
+        name="guia_growbox",
     ),
     path(
         "mycobox/",

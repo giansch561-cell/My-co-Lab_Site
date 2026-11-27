@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Artigo, Cogumelo, Fonte, MetodoCultivo, Pagina
+from .models import Artigo, Cogumelo, Fonte, GuiaGrowBox, MetodoCultivo, Pagina
 
 
 class AdminComTraducoes(admin.ModelAdmin):
@@ -27,11 +27,11 @@ class PaginaAdmin(AdminComTraducoes):
 
 
 class FichaAdmin(AdminComTraducoes):
-    list_display = ("titulo", "publicado", "ordem")
+    list_display = ("titulo", "publicado", "publicado_em", "ordem")
     list_filter = ("publicado",)
     search_fields = ("titulo", "titulo_de", "titulo_en")
     prepopulated_fields = {"slug": ("titulo",)}
 
 
-admin.site.register([Artigo, Cogumelo, MetodoCultivo], FichaAdmin)
+admin.site.register([Artigo, Cogumelo, MetodoCultivo, GuiaGrowBox], FichaAdmin)
 admin.site.register(Fonte)

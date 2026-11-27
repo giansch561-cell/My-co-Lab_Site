@@ -15,10 +15,25 @@
             <img class="abertura-imagem" src="{% static 'editorial/bosque.webp' %}" width="1400" height="933" alt="{% translate 'Uma criança segue por um caminho no bosque de outono, entre as árvores e a névoa.' %}" fetchpriority="high">
         {% endif %}
     </section>
-    <ul class="grelha" aria-label="{% translate 'Explorar o My-co-Lab' %}">
+    <section class="novidades" aria-labelledby="titulo-novidades">
+        <h2 id="titulo-novidades">{% translate "O que há de novo" %}</h2>
+        {% if recentes %}
+            <ul>
+                {% for ficha in recentes %}
+                    <li>
+                        <time datetime="{{ ficha.publicado_em|date:'c' }}">{{ ficha.publicado_em|date:"j M Y" }}</time>
+                        <a href="{{ ficha.get_absolute_url }}">{{ ficha|texto_localizado:"titulo" }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>{% translate "Ainda não há publicações recentes." %}</p>
+        {% endif %}
+    </section>
+    <ul class="grelha grelha-inicio" aria-label="{% translate 'Explorar o My-co-Lab' %}">
         {% for cartao in cartoes %}
             {% url cartao.rota as destino %}
-            {% include 'editorial/cartao.html' with titulo=cartao.titulo imagem=cartao.pagina.imagem destino=destino only %}
+            {% include 'editorial/cartao.html' with titulo=cartao.titulo imagem=cartao.pagina.imagem imagem_padrao=cartao.imagem_padrao destino=destino only %}
         {% endfor %}
     </ul>
 {% endblock %}

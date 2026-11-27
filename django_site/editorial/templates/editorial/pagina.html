@@ -26,4 +26,9 @@
             </video>
         </section>
     {% endif %}
+    {% if secao == 'mycobox' %}
+        <p class="ligacao-secao">
+            <a href="{% url 'editorial:growbox' %}">{% translate "Ver os guias da GrowBox" %}</a>
+        </p>
+    {% endif %}
 {% endblock %}

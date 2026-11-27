@@ -21,7 +21,7 @@
             <p class="ligacao-secao">
                 <a href="{{ ficha.metodo_cultivo.get_absolute_url }}">{% translate "Aprender a cultivar" %}</a>
             </p>
-        {% elif secao == 'cultivo' %}
+        {% elif secao == 'cultivo' or secao == 'growbox' %}
             {% if ficha.url_compra and ficha.preco %}
                 <p class="ligacao-secao">
                     <a class="botao" href="{{ ficha.url_compra }}">{% translate "Comprar o guia em PDF" %}</a>

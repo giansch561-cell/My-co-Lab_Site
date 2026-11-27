@@ -35,8 +35,11 @@ msgstr "Explore the GrowBox project"
 msgid "Cultivo"
 msgstr "Cultivation"
 
-msgid "Esboço dos cogumelos-ostra a crescer no bloco de cultivo, dentro da GrowBox."
-msgstr "Sketch of oyster mushrooms growing on the substrate block inside the GrowBox."
+msgid ""
+"Esboço dos cogumelos-ostra a crescer no bloco de cultivo, dentro da GrowBox."
+msgstr ""
+"Sketch of oyster mushrooms growing on the substrate block inside the "
+"GrowBox."
 
 msgid "Explorar o My-co-Lab"
 msgstr "Explore My-co-Lab"
@@ -75,7 +78,9 @@ msgstr "About me"
 msgid "Timelapse da primeira colheita"
 msgstr "First harvest time-lapse"
 
-msgid "Uma criança segue por um caminho no bosque de outono, entre as árvores e a névoa."
+msgid ""
+"Uma criança segue por um caminho no bosque de outono, entre as árvores e a "
+"névoa."
 msgstr "A child follows a path through a misty autumn woodland."
 
 msgid "Ver o timelapse"
@@ -83,3 +88,12 @@ msgstr "Watch the time-lapse"
 
 msgid "À volta dos cogumelos"
 msgstr "About mushrooms"
+
+msgid "O que há de novo"
+msgstr "What's new"
+
+msgid "Ainda não há publicações recentes."
+msgstr "There are no recent posts yet."
+
+msgid "Ver os guias da GrowBox"
+msgstr "Browse the GrowBox guides"

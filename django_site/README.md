@@ -23,14 +23,17 @@ Abre `http://127.0.0.1:8000/` para ver o site e
 ## Preencher depois
 
 - **Páginas.** Escolhe a secção para acrescentar os seus textos e a imagem. Nas
-  secções À volta dos cogumelos, Cultivo e Cogumelos, a imagem é usada no
+  secções À volta dos cogumelos, Cultivo, Cogumelos e GrowBox, a imagem é usada no
   respetivo cartão do Início. O timelapse é apresentado na MycoBox.
-- **Artigos, Cogumelos e Métodos de cultivo.** Cria as fichas como rascunho.
+- **Artigos, Cogumelos, Métodos de cultivo e Guias GrowBox.** Cria as fichas como rascunho.
   Marca **Publicado** quando estiverem prontas. Nos cogumelos, o esboço aparece
   no catálogo e a fotografia na ficha individual.
-- **Cultivo.** Acrescenta o preço e a ligação de compra quando o PDF estiver
+- **Cultivo e GrowBox.** Acrescenta o preço e a ligação de compra quando o PDF estiver
   disponível. A ligação é apresentada quando ambos estiverem preenchidos.
 - **Fontes.** Acrescenta as referências usadas. Aparecem na Bibliografia.
+- **O que há de novo.** O Início mostra as três publicações mais recentes. A
+  data é preenchida na primeira publicação. Para uma ficha já publicada
+  antes desta atualização, indica a data original no campo **Data de publicação**.
 
 ## Idiomas
 

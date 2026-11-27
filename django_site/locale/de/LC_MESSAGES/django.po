@@ -35,8 +35,10 @@ msgstr "Das GrowBox-Projekt entdecken"
 msgid "Cultivo"
 msgstr "Zucht"
 
-msgid "Esboço dos cogumelos-ostra a crescer no bloco de cultivo, dentro da GrowBox."
-msgstr "Skizze von Austernseitlingen, die auf dem Zuchtblock in der GrowBox wachsen."
+msgid ""
+"Esboço dos cogumelos-ostra a crescer no bloco de cultivo, dentro da GrowBox."
+msgstr ""
+"Skizze von Austernseitlingen, die auf dem Zuchtblock in der GrowBox wachsen."
 
 msgid "Explorar o My-co-Lab"
 msgstr "My-co-Lab entdecken"
@@ -75,7 +77,9 @@ msgstr "Über mich"
 msgid "Timelapse da primeira colheita"
 msgstr "Zeitraffer der ersten Ernte"
 
-msgid "Uma criança segue por um caminho no bosque de outono, entre as árvores e a névoa."
+msgid ""
+"Uma criança segue por um caminho no bosque de outono, entre as árvores e a "
+"névoa."
 msgstr "Ein Kind geht auf einem Weg durch einen nebligen Herbstwald."
 
 msgid "Ver o timelapse"
@@ -83,3 +87,12 @@ msgstr "Zeitraffer ansehen"
 
 msgid "À volta dos cogumelos"
 msgstr "Rund um Pilze"
+
+msgid "O que há de novo"
+msgstr "Was gibt es Neues?"
+
+msgid "Ainda não há publicações recentes."
+msgstr "Es gibt noch keine neuen Beiträge."
+
+msgid "Ver os guias da GrowBox"
+msgstr "GrowBox-Anleitungen ansehen"

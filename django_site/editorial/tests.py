@@ -1,7 +1,9 @@
+from datetime import datetime, timedelta, timezone
+
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from .models import Artigo, Cogumelo, Pagina
+from .models import Artigo, Cogumelo, GuiaGrowBox, MetodoCultivo, Pagina
 
 
 class IdiomasTest(TestCase):
@@ -68,3 +70,71 @@ class IdiomasTest(TestCase):
                 pagina = self.client.get(f"/admin/editorial/{modelo}/add/")
                 self.assertContains(pagina, f'name="{campo}_de"')
                 self.assertContains(pagina, f'name="{campo}_en"')
+
+
+class PaginaInicialTest(TestCase):
+    def test_ficha_growbox_leva_ao_catalogo_e_ao_guia_traduzido(self):
+        guia = GuiaGrowBox.objects.create(
+            titulo="Câmara e timelapse",
+            titulo_en="Camera and time-lapse",
+            slug="camara-e-timelapse",
+            publicado=True,
+            preco="9 CHF",
+            url_compra="https://example.org/guia",
+        )
+        inicio = self.client.get("/")
+        self.assertContains(inicio, 'class="cartao"', count=4)
+        self.assertContains(inicio, 'href="/growbox/"')
+        self.assertContains(inicio, "/static/editorial/growbox.webp")
+        self.assertContains(self.client.get("/mycobox/"), 'href="/growbox/"')
+        catalogo = self.client.get("/en/growbox/")
+        self.assertContains(catalogo, "<h1>GrowBox</h1>")
+        self.assertContains(catalogo, "Camera and time-lapse")
+        self.assertContains(catalogo, 'href="/en/growbox/camara-e-timelapse/"')
+        ficha = self.client.get("/en/growbox/camara-e-timelapse/")
+        self.assertContains(ficha, "Buy the PDF guide")
+        guia.publicado = False
+        guia.save()
+        self.assertEqual(self.client.get("/en/growbox/camara-e-timelapse/").status_code, 404)
+
+    def test_novidades_mostram_apenas_as_tres_publicacoes_datadas_mais_recentes(self):
+        data = datetime(2026, 11, 27, 9, tzinfo=timezone.utc)
+        Artigo.objects.create(
+            titulo="Artigo mais antigo", slug="antigo", publicado=True, publicado_em=data,
+        )
+        Artigo.objects.create(titulo="Rascunho", slug="rascunho", publicado_em=data + timedelta(days=5))
+        Cogumelo.objects.create(
+            titulo="Cogumelo novo", slug="novo", publicado=True, publicado_em=data + timedelta(days=1),
+        )
+        MetodoCultivo.objects.create(
+            titulo="Método novo", slug="novo", publicado=True, publicado_em=data + timedelta(days=2),
+        )
+        GuiaGrowBox.objects.create(
+            titulo="Guia novo", titulo_de="Neue Anleitung", slug="novo", publicado=True,
+            publicado_em=data + timedelta(days=3),
+        )
+        resposta = self.client.get("/de/")
+        html = resposta.content.decode()
+        self.assertContains(resposta, "Was gibt es Neues?")
+        self.assertContains(resposta, 'href="/de/growbox/novo/"')
+        self.assertContains(resposta, '<time datetime="2026-11-30T10:00:00+01:00">')
+        self.assertLess(html.index("Neue Anleitung"), html.index("Método novo"))
+        self.assertLess(html.index("Método novo"), html.index("Cogumelo novo"))
+        self.assertNotContains(resposta, "Artigo mais antigo")
+        self.assertNotContains(resposta, "Rascunho")
+
+    def test_data_e_definida_na_primeira_publicacao_e_mantida_nas_edicoes(self):
+        artigo = Artigo.objects.create(titulo="Artigo", slug="artigo")
+        self.assertIsNone(artigo.publicado_em)
+        artigo.publicado = True
+        artigo.save(update_fields=["publicado"])
+        artigo.refresh_from_db()
+        primeira_publicacao = artigo.publicado_em
+        self.assertIsNotNone(primeira_publicacao)
+        artigo.publicado = False
+        artigo.save()
+        self.assertNotContains(self.client.get("/"), 'href="/a-volta-dos-cogumelos/artigo/"')
+        artigo.publicado = True
+        artigo.save()
+        artigo.refresh_from_db()
+        self.assertEqual(artigo.publicado_em, primeira_publicacao)
