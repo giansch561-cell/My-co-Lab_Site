@@ -107,6 +107,13 @@ class CatalogoView(ListView):
     template_name = "editorial/catalogo.html"
     context_object_name = "fichas"
     paginate_by = 18
+    secao_pagina = None
+
+    def get_context_data(self, **kwargs):
+        contexto = super().get_context_data(**kwargs)
+        if self.secao_pagina is not None:
+            contexto["pagina"] = Pagina.objects.filter(secao=self.secao_pagina).first()
+        return contexto
 
 
 class FichaView(DetailView):

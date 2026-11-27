@@ -2,8 +2,10 @@
 {% load i18n idiomas %}
 {% block titulo %}{{ titulo }} | My-co-Lab{% endblock %}
 {% block conteudo %}
-    <h1>{{ titulo }}</h1>
-    {% block introducao %}{% endblock %}
+    {% block abertura %}
+        <h1>{{ titulo }}</h1>
+        {% block introducao %}{% endblock %}
+    {% endblock %}
     {% if fichas %}
         <ul class="grelha">
             {% for ficha in fichas %}

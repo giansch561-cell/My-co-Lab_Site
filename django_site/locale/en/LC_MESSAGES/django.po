@@ -179,3 +179,11 @@ msgstr ""
 
 msgid "Os primeiros guias estão em preparação."
 msgstr "The first guides are in preparation."
+
+msgid ""
+"Descobre o que é um cogumelo, como vive um fungo e como se forma um "
+"cogumelo."
+msgstr "Discover what a mushroom is, how fungi live and how a mushroom forms."
+
+msgid "Cogumelos entre musgo e folhas caídas no chão do bosque."
+msgstr "Mushrooms among moss and fallen leaves on the woodland floor."

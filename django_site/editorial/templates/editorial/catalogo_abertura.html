@@ -1,0 +1,18 @@
+{% extends 'editorial/catalogo.html' %}
+{% load static idiomas %}
+
+{% block abertura %}
+    <section class="abertura">
+        <div class="abertura-texto">
+            <h1>{{ titulo }}</h1>
+            <div class="introducao">
+                {{ pagina|texto_localizado:"introducao"|default:introducao_padrao|linebreaks }}
+            </div>
+        </div>
+        {% if pagina.imagem %}
+            <img class="abertura-imagem" src="{{ pagina.imagem.url }}" alt="{{ pagina|texto_localizado:'imagem_alt' }}" fetchpriority="high">
+        {% else %}
+            <img class="abertura-imagem" src="{% static imagem_padrao %}" alt="{{ imagem_alt_padrao }}" fetchpriority="high">
+        {% endif %}
+    </section>
+{% endblock %}

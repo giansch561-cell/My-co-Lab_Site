@@ -196,6 +196,37 @@ class PaginaInicialTest(TestCase):
         self.assertEqual(artigo.publicado_em, primeira_publicacao)
 
 
+class CatalogoArtigosTest(TestCase):
+    def test_abertura_traduzida_fica_acima_das_fichas(self):
+        Artigo.objects.create(titulo="Artigo publicado", slug="publicado", publicado=True)
+        for prefixo, frase in (
+            ("", "Descobre o que é um cogumelo"),
+            ("/de", "Entdecke, was ein Pilz ist"),
+            ("/en", "Discover what a mushroom is"),
+        ):
+            with self.subTest(prefixo=prefixo):
+                pagina = self.client.get(f"{prefixo}/a-volta-dos-cogumelos/")
+                self.assertContains(pagina, f'href="{prefixo}/a-volta-dos-cogumelos/publicado/"')
+                abertura, fichas = pagina.content.decode().split("</section>", 1)
+                self.assertIn(frase, abertura)
+                self.assertIn('class="abertura-texto"', abertura)
+                self.assertIn('src="/static/editorial/abertura-artigos.webp"', abertura)
+                self.assertIn('<ul class="grelha">', fichas)
+
+    def test_abertura_usa_introducao_e_imagem_guardadas(self):
+        Pagina.objects.create(
+            secao=Pagina.Secao.ARTIGOS,
+            introducao="Introdução do editor.",
+            introducao_en="The editor's introduction.",
+            imagem="paginas/artigos.webp",
+            imagem_alt_en="Woodland mushrooms",
+        )
+        pagina = self.client.get("/en/a-volta-dos-cogumelos/")
+        self.assertContains(pagina, "The editor&#x27;s introduction.")
+        self.assertContains(pagina, 'src="/media/paginas/artigos.webp" alt="Woodland mushrooms"')
+        self.assertNotContains(pagina, "Discover what a mushroom is")
+
+
 class MycoBoxTest(TestCase):
     def test_fichas_e_galeria_aproveitam_o_timelapse_anterior(self):
         Pagina.objects.create(secao=Pagina.Secao.MYCOBOX, timelapse="videos/colheita.mp4")

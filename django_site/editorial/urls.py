@@ -2,7 +2,7 @@ from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
 from . import views
-from .models import Artigo, Cogumelo, GuiaGrowBox, MetodoCultivo
+from .models import Artigo, Cogumelo, GuiaGrowBox, MetodoCultivo, Pagina
 
 app_name = "editorial"
 
@@ -18,7 +18,17 @@ urlpatterns = [
         "a-volta-dos-cogumelos/",
         views.CatalogoView.as_view(
             queryset=artigos,
-            extra_context={"titulo": _("À volta dos cogumelos"), "secao": "artigos"},
+            template_name="editorial/catalogo_abertura.html",
+            secao_pagina=Pagina.Secao.ARTIGOS,
+            extra_context={
+                "titulo": _("À volta dos cogumelos"),
+                "secao": "artigos",
+                "introducao_padrao": _(
+                    "Descobre o que é um cogumelo, como vive um fungo e como se forma um cogumelo."
+                ),
+                "imagem_padrao": "editorial/abertura-artigos.webp",
+                "imagem_alt_padrao": _("Cogumelos entre musgo e folhas caídas no chão do bosque."),
+            },
         ),
         name="artigos",
     ),

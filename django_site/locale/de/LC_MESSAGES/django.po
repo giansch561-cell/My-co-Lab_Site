@@ -179,3 +179,12 @@ msgstr ""
 
 msgid "Os primeiros guias estão em preparação."
 msgstr "Die ersten Anleitungen sind in Vorbereitung."
+
+msgid ""
+"Descobre o que é um cogumelo, como vive um fungo e como se forma um "
+"cogumelo."
+msgstr ""
+"Entdecke, was ein Pilz ist, wie er lebt und wie sein Fruchtkörper entsteht."
+
+msgid "Cogumelos entre musgo e folhas caídas no chão do bosque."
+msgstr "Pilze zwischen Moos und Herbstlaub auf dem Waldboden."
