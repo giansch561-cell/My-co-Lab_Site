@@ -1,7 +1,11 @@
+from django.conf import settings
+from django.http import FileResponse, Http404
 from django.shortcuts import render
+from django.views.decorators.cache import cache_control, never_cache
 from django.views.generic import DetailView, ListView
 
-from .models import Artigo, Cogumelo, Fonte, GuiaGrowBox, MetodoCultivo, Pagina
+from .live import ultima_fotografia, ultima_medicao
+from .models import Artigo, Cogumelo, Fonte, GuiaGrowBox, MetodoCultivo, Pagina, Timelapse
 
 
 def inicio(request):
@@ -49,6 +53,7 @@ def pagina(request, secao, titulo, imagem_padrao=""):
             "titulo": titulo,
             "pagina": Pagina.objects.filter(secao=secao).first(),
             "imagem_padrao": imagem_padrao,
+            "foto_live": ultima_fotografia() if secao == Pagina.Secao.MYCOBOX else None,
         },
     )
 
@@ -59,6 +64,37 @@ def bibliografia(request):
         "editorial/bibliografia.html",
         {"fontes": Fonte.objects.all(), "secao": "bibliografia"},
     )
+
+
+def timelapses(request):
+    return render(
+        request,
+        "editorial/timelapses.html",
+        {
+            "secao": "mycobox",
+            "pagina": Pagina.objects.filter(secao=Pagina.Secao.MYCOBOX).first(),
+            "timelapses": Timelapse.objects.all(),
+        },
+    )
+
+
+@never_cache
+def live(request, parcial=False):
+    modelo = "editorial/live_dados.html" if parcial else "editorial/live.html"
+    return render(
+        request,
+        modelo,
+        {"secao": "mycobox", "foto": ultima_fotografia(), "leitura": ultima_medicao()},
+    )
+
+
+@cache_control(private=True, max_age=60)
+def fotografia_live(request):
+    try:
+        foto = settings.MYCOLAB_LIVE_PHOTO.open("rb")
+    except OSError as erro:
+        raise Http404 from erro
+    return FileResponse(foto, content_type="image/jpeg")
 
 
 class CatalogoView(ListView):

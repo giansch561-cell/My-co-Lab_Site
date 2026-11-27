@@ -4,6 +4,8 @@
         <span class="cartao-titulo">{{ titulo }}</span>
         {% if imagem %}
             <img class="cartao-imagem{% if esboco %} esboco{% endif %}" src="{{ imagem.url }}" alt="" loading="lazy" decoding="async">
+        {% elif imagem_url %}
+            <img class="cartao-imagem" src="{{ imagem_url }}" alt="" loading="lazy" decoding="async">
         {% elif imagem_padrao %}
             <img class="cartao-imagem" src="{% static imagem_padrao %}" alt="" loading="lazy" decoding="async">
         {% else %}

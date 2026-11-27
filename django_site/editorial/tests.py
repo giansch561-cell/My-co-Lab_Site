@@ -1,9 +1,14 @@
 from datetime import datetime, timedelta, timezone
+import os
+from pathlib import Path
+import sqlite3
+from tempfile import TemporaryDirectory
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+from PIL import Image
 
-from .models import Artigo, Cogumelo, GuiaGrowBox, MetodoCultivo, Pagina
+from .models import Artigo, Cogumelo, GuiaGrowBox, MetodoCultivo, Pagina, Timelapse
 
 
 class IdiomasTest(TestCase):
@@ -138,3 +143,67 @@ class PaginaInicialTest(TestCase):
         artigo.save()
         artigo.refresh_from_db()
         self.assertEqual(artigo.publicado_em, primeira_publicacao)
+
+
+class MycoBoxTest(TestCase):
+    def test_fichas_e_galeria_aproveitam_o_timelapse_anterior(self):
+        Pagina.objects.create(secao=Pagina.Secao.MYCOBOX, timelapse="videos/colheita.mp4")
+        Timelapse.objects.create(titulo="Nova experiência", titulo_en="New experiment", video="videos/novo.mp4")
+        pagina = self.client.get("/mycobox/")
+        self.assertContains(pagina, 'href="/mycobox/timelapses/"')
+        self.assertContains(pagina, 'href="/mycobox/live/"')
+        self.assertContains(pagina, 'src="/media/videos/colheita.mp4"')
+        galeria = self.client.get("/en/mycobox/timelapses/")
+        self.assertContains(galeria, "<h1>Time-lapses</h1>")
+        self.assertContains(galeria, "New experiment")
+        self.assertContains(galeria, 'src="/media/videos/novo.mp4"')
+        self.assertContains(galeria, 'src="/media/videos/colheita.mp4"')
+
+    def test_live_indica_quando_os_dados_ainda_nao_chegaram(self):
+        with TemporaryDirectory() as pasta:
+            foto = Path(pasta) / "latest.jpg"
+            base = Path(pasta) / "montra.sqlite3"
+            with self.settings(MYCOLAB_LIVE_PHOTO=foto, MYCOLAB_LIVE_READINGS=base):
+                pagina = self.client.get("/mycobox/live/")
+                self.assertContains(pagina, "Ainda não há uma fotografia disponível.")
+                self.assertContains(pagina, "Ainda não há medições disponíveis.")
+                self.assertEqual(self.client.get("/mycobox/live/foto/").status_code, 404)
+                self.assertFalse(base.exists())
+
+    def test_live_mostra_a_foto_e_leituras_atualizadas_sem_mudar_os_originais(self):
+        with TemporaryDirectory() as pasta:
+            foto = Path(pasta) / "latest.jpg"
+            base = Path(pasta) / "montra.sqlite3"
+            Image.new("RGB", (2, 2)).save(foto)
+            os.utime(foto, (1795756380, 1795756380))
+            with sqlite3.connect(base) as db:
+                db.execute(
+                    "CREATE TABLE projects_growboxreading "
+                    "(id INTEGER PRIMARY KEY, measured_at TEXT, temperature_c REAL, humidity_percent REAL)"
+                )
+                db.execute(
+                    "INSERT INTO projects_growboxreading VALUES (1, '2026-11-27 05:12:00', 19.5, 83.4)"
+                )
+            with self.settings(MYCOLAB_LIVE_PHOTO=foto, MYCOLAB_LIVE_READINGS=base):
+                painel = self.client.get("/en/mycobox/live/")
+                self.assertContains(painel, 'data-live-url="/en/mycobox/live/dados/"')
+                self.assertContains(painel, "19.5 °C")
+                self.assertContains(painel, "83.4 %")
+                self.assertContains(painel, '<time datetime="2026-11-27T06:12:00+01:00">')
+                imagem = self.client.get("/en/mycobox/live/foto/")
+                self.assertEqual(imagem.headers["Content-Type"], "image/jpeg")
+                self.assertEqual(b"".join(imagem.streaming_content), foto.read_bytes())
+                with db:
+                    db.execute(
+                        "INSERT INTO projects_growboxreading VALUES (2, '2026-11-27 05:13:00', 20.1, 84.2)"
+                    )
+                os.utime(foto, (1795756440, 1795756440))
+                dados = self.client.get("/en/mycobox/live/dados/")
+                self.assertContains(dados, "20.1 °C")
+                self.assertContains(dados, "84.2 %")
+                self.assertContains(dados, 'src="/en/mycobox/live/foto/?v=1795756440000000000"')
+                self.assertNotContains(dados, "<h1>")
+                self.assertIn("no-store", dados.headers["Cache-Control"])
+                caixa = self.client.get("/en/mycobox/")
+                self.assertContains(caixa, 'src="/en/mycobox/live/foto/?v=1795756440000000000"')
+            db.close()

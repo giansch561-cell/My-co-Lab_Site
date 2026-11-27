@@ -1,0 +1,8 @@
+{% load i18n %}
+<section class="colheita">
+    <h2>{{ titulo }}</h2>
+    {% if data %}<p><time datetime="{{ data|date:'Y-m-d' }}">{{ data|date:"DATE_FORMAT" }}</time></p>{% endif %}
+    <video controls playsinline preload="metadata" aria-label="{{ titulo }}" src="{{ video.url }}">
+        <a href="{{ video.url }}">{% translate "Ver o timelapse" %}</a>
+    </video>
+</section>

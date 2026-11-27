@@ -1,0 +1,15 @@
+{% extends 'editorial/base.html' %}
+{% load i18n idiomas %}
+{% block titulo %}{% translate "Timelapses" %} | My-co-Lab{% endblock %}
+{% block conteudo %}
+    <h1>{% translate "Timelapses" %}</h1>
+    {% for timelapse in timelapses %}
+        {% include 'editorial/timelapse_video.html' with titulo=timelapse|texto_localizado:"titulo" video=timelapse.video data=timelapse.data only %}
+    {% endfor %}
+    {% if pagina.timelapse %}
+        {% translate "Primeira colheita" as titulo_colheita %}
+        {% include 'editorial/timelapse_video.html' with titulo=titulo_colheita video=pagina.timelapse only %}
+    {% elif not timelapses %}
+        <p>{% translate "Ainda não há timelapses disponíveis." %}</p>
+    {% endif %}
+{% endblock %}

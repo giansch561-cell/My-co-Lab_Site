@@ -148,3 +148,17 @@ class Fonte(models.Model):
 
     def __str__(self):
         return self.titulo
+
+
+class Timelapse(models.Model):
+    titulo = models.CharField("título", max_length=160)
+    titulo_de = models.CharField("título — alemão", max_length=160, blank=True)
+    titulo_en = models.CharField("título — inglês", max_length=160, blank=True)
+    video = models.FileField(upload_to="videos/", validators=[FileExtensionValidator(["mp4", "webm"])])
+    data = models.DateField("data da experiência", blank=True, null=True)
+
+    class Meta:
+        ordering = ("-data", "-pk")
+
+    def __str__(self):
+        return self.titulo

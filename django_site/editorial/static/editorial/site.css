@@ -221,6 +221,10 @@ h2 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.grelha-mycobox {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .grelha-inicio .cartao-titulo {
     font-size: clamp(1.35rem, 2vw, 1.8rem);
 }
@@ -319,6 +323,37 @@ h2 {
     max-width: 58rem;
 }
 
+.live-dados {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 1.5rem;
+}
+
+.live-fotografia {
+    margin: 0;
+}
+
+.live-fotografia figcaption {
+    margin-top: .45rem;
+}
+
+.live-medicoes dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .65rem;
+}
+
+.live-medicoes dl > div {
+    padding: .65rem;
+    border: 1px solid var(--borda);
+}
+
+.live-medicoes dd {
+    margin: .2rem 0 0;
+    font-size: 1.4rem;
+    font-weight: 650;
+}
+
 .paginacao {
     display: flex;
     flex-wrap: wrap;
@@ -411,7 +446,7 @@ h2 {
         padding-inline: .15rem;
     }
 
-    .abertura, .grelha, .novidades {
+    .abertura, .grelha, .novidades, .live-dados {
         grid-template-columns: minmax(0, 1fr);
     }
 

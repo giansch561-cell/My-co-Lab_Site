@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Artigo, Cogumelo, Fonte, GuiaGrowBox, MetodoCultivo, Pagina
+from .models import Artigo, Cogumelo, Fonte, GuiaGrowBox, MetodoCultivo, Pagina, Timelapse
 
 
 class AdminComTraducoes(admin.ModelAdmin):
@@ -35,3 +35,4 @@ class FichaAdmin(AdminComTraducoes):
 
 admin.site.register([Artigo, Cogumelo, MetodoCultivo, GuiaGrowBox], FichaAdmin)
 admin.site.register(Fonte)
+admin.site.register(Timelapse, AdminComTraducoes)

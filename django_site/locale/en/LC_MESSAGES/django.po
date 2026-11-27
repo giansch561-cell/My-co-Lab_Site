@@ -75,9 +75,6 @@ msgstr "Next"
 msgid "Sobre"
 msgstr "About me"
 
-msgid "Timelapse da primeira colheita"
-msgstr "First harvest time-lapse"
-
 msgid ""
 "Uma criança segue por um caminho no bosque de outono, entre as árvores e a "
 "névoa."
@@ -97,3 +94,33 @@ msgstr "There are no recent posts yet."
 
 msgid "Ver os guias da GrowBox"
 msgstr "Browse the GrowBox guides"
+
+msgid "Timelapses"
+msgstr "Time-lapses"
+
+msgid "Ainda não há timelapses disponíveis."
+msgstr "There are no time-lapses available yet."
+
+msgid "Última fotografia do interior da GrowBox"
+msgstr "Latest photo from inside the GrowBox"
+
+msgid "Fotografia de"
+msgstr "Photo from"
+
+msgid "Ainda não há uma fotografia disponível."
+msgstr "There is no photo available yet."
+
+msgid "Condições na GrowBox"
+msgstr "Conditions in the GrowBox"
+
+msgid "Temperatura"
+msgstr "Temperature"
+
+msgid "Humidade"
+msgstr "Humidity"
+
+msgid "Medição de"
+msgstr "Reading from"
+
+msgid "Ainda não há medições disponíveis."
+msgstr "There are no readings available yet."

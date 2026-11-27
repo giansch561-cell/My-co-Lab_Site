@@ -18,13 +18,23 @@
     {% with texto=pagina|texto_localizado:"texto" %}
         {% if texto %}<div class="leitura">{{ texto|linebreaks }}</div>{% endif %}
     {% endwith %}
+    {% if secao == 'mycobox' %}
+        <ul class="grelha grelha-mycobox">
+            {% translate "Timelapses" as titulo_timelapses %}
+            {% url 'editorial:timelapses' as destino_timelapses %}
+            {% include 'editorial/cartao.html' with titulo=titulo_timelapses destino=destino_timelapses imagem_padrao="editorial/growbox.webp" only %}
+            {% url 'editorial:live' as destino_live %}
+            {% if foto_live %}
+                {% url 'editorial:live_foto' as foto_url %}
+                {% include 'editorial/cartao.html' with titulo="Live" destino=destino_live imagem_url=foto_url|add:"?v="|add:foto_live.versao only %}
+            {% else %}
+                {% include 'editorial/cartao.html' with titulo="Live" destino=destino_live only %}
+            {% endif %}
+        </ul>
+    {% endif %}
     {% if secao == 'mycobox' and pagina.timelapse %}
-        <section class="colheita">
-            <h2>{% translate "Primeira colheita" %}</h2>
-            <video controls playsinline preload="metadata" aria-label="{% translate 'Timelapse da primeira colheita' %}" src="{{ pagina.timelapse.url }}">
-                <a href="{{ pagina.timelapse.url }}">{% translate "Ver o timelapse" %}</a>
-            </video>
-        </section>
+        {% translate "Primeira colheita" as titulo_colheita %}
+        {% include 'editorial/timelapse_video.html' with titulo=titulo_colheita video=pagina.timelapse only %}
     {% endif %}
     {% if secao == 'mycobox' %}
         <p class="ligacao-secao">

@@ -72,5 +72,9 @@ urlpatterns = [
         {"secao": "mycobox", "titulo": "MycoBox", "imagem_padrao": "editorial/mycobox.webp"},
         name="mycobox",
     ),
+    path("mycobox/timelapses/", views.timelapses, name="timelapses"),
+    path("mycobox/live/", views.live, name="live"),
+    path("mycobox/live/dados/", views.live, {"parcial": True}, name="live_dados"),
+    path("mycobox/live/foto/", views.fotografia_live, name="live_foto"),
     path("bibliografia/", views.bibliografia, name="bibliografia"),
 ]

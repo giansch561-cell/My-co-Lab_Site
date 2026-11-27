@@ -74,9 +74,6 @@ msgstr "Weiter"
 msgid "Sobre"
 msgstr "Über mich"
 
-msgid "Timelapse da primeira colheita"
-msgstr "Zeitraffer der ersten Ernte"
-
 msgid ""
 "Uma criança segue por um caminho no bosque de outono, entre as árvores e a "
 "névoa."
@@ -96,3 +93,33 @@ msgstr "Es gibt noch keine neuen Beiträge."
 
 msgid "Ver os guias da GrowBox"
 msgstr "GrowBox-Anleitungen ansehen"
+
+msgid "Timelapses"
+msgstr "Zeitraffer"
+
+msgid "Ainda não há timelapses disponíveis."
+msgstr "Es sind noch keine Zeitraffer verfügbar."
+
+msgid "Última fotografia do interior da GrowBox"
+msgstr "Neuestes Foto aus der GrowBox"
+
+msgid "Fotografia de"
+msgstr "Foto vom"
+
+msgid "Ainda não há uma fotografia disponível."
+msgstr "Es ist noch kein Foto verfügbar."
+
+msgid "Condições na GrowBox"
+msgstr "Bedingungen in der GrowBox"
+
+msgid "Temperatura"
+msgstr "Temperatur"
+
+msgid "Humidade"
+msgstr "Luftfeuchtigkeit"
+
+msgid "Medição de"
+msgstr "Messung vom"
+
+msgid "Ainda não há medições disponíveis."
+msgstr "Es sind noch keine Messwerte verfügbar."

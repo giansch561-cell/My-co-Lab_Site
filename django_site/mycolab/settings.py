@@ -83,4 +83,10 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = Path(os.environ.get("DJANGO_MEDIA_ROOT", BASE_DIR / "media"))
+MYCOLAB_LIVE_PHOTO = Path(os.environ.get(
+    "MYCOLAB_LIVE_PHOTO", Path.home() / ".local/share/mycolab-growbox/latest.jpg"
+))
+MYCOLAB_LIVE_READINGS = Path(os.environ.get(
+    "MYCOLAB_LIVE_READINGS", Path.home() / "montra-digital/db.sqlite3"
+))
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

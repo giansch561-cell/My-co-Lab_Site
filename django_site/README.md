@@ -47,6 +47,19 @@ mostram o texto em português. As traduções do menu e dos botões já vêm com
 Depois de editar os ficheiros `.po` da interface, recompila-os com
 `python manage.py compilemessages -l de -l en`, com GNU gettext instalado.
 
+## MycoBox
+
+A página **Timelapses** apresenta o vídeo da primeira colheita, quando já
+carregado em **Páginas → MycoBox**, e os vídeos acrescentados em **Timelapses**.
+
+A página **Live** verifica a cada minuto se chegaram uma nova fotografia ou uma
+nova medição. Apresenta a hora de captura e a hora da leitura em separado.
+No Raspberry Pi, reutiliza a fotografia que a Montra Digital recebe em
+`~/.local/share/mycolab-growbox/latest.jpg` e lê a tabela
+`projects_growboxreading` de `~/montra-digital/db.sqlite3` em modo só de leitura.
+Para caminhos diferentes, define `MYCOLAB_LIVE_PHOTO` e
+`MYCOLAB_LIVE_READINGS` no ambiente do serviço.
+
 O servidor `runserver` serve a prévia local. A publicação tem configuração
 própria. Se desativares a prévia com `DJANGO_DEBUG=0`, define
 `DJANGO_SECRET_KEY` e `DJANGO_ALLOWED_HOSTS` no ambiente.

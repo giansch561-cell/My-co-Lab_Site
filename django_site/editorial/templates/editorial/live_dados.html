@@ -1,0 +1,33 @@
+{% load i18n %}
+<figure class="live-fotografia">
+    {% if foto %}
+        <img src="{% url 'editorial:live_foto' %}?v={{ foto.versao }}" alt="{% translate 'Última fotografia do interior da GrowBox' %}">
+        <figcaption>
+            {% translate "Fotografia de" %}
+            <time datetime="{{ foto.capturada_em|date:'c' }}">{{ foto.capturada_em|date:"SHORT_DATETIME_FORMAT" }}</time>
+        </figcaption>
+    {% else %}
+        <p>{% translate "Ainda não há uma fotografia disponível." %}</p>
+    {% endif %}
+</figure>
+<section class="live-medicoes">
+    <h2>{% translate "Condições na GrowBox" %}</h2>
+    {% if leitura %}
+        <dl>
+            <div>
+                <dt>{% translate "Temperatura" %}</dt>
+                <dd>{{ leitura.temperatura|floatformat:1 }} °C</dd>
+            </div>
+            <div>
+                <dt>{% translate "Humidade" %}</dt>
+                <dd>{{ leitura.humidade|floatformat:1 }} %</dd>
+            </div>
+        </dl>
+        <p>
+            {% translate "Medição de" %}
+            <time datetime="{{ leitura.medida_em|date:'c' }}">{{ leitura.medida_em|date:"SHORT_DATETIME_FORMAT" }}</time>
+        </p>
+    {% else %}
+        <p>{% translate "Ainda não há medições disponíveis." %}</p>
+    {% endif %}
+</section>

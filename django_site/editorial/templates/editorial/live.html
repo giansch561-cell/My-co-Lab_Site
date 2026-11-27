@@ -1,0 +1,10 @@
+{% extends 'editorial/base.html' %}
+{% load static %}
+{% block titulo %}Live | My-co-Lab{% endblock %}
+{% block conteudo %}
+    <h1>Live</h1>
+    <div class="live-dados" data-live-url="{% url 'editorial:live_dados' %}">
+        {% include 'editorial/live_dados.html' %}
+    </div>
+    <script src="{% static 'editorial/live.js' %}" defer></script>
+{% endblock %}
