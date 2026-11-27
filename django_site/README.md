@@ -52,10 +52,14 @@ Depois de editar os ficheiros `.po` da interface, recompila-os com
 A página **Timelapses** apresenta o vídeo da primeira colheita, quando já
 carregado em **Páginas → MycoBox**, e os vídeos acrescentados em **Timelapses**.
 
-A página **Live** verifica a cada minuto se chegaram uma nova fotografia ou uma
-nova medição. O contador mostra o tempo até essa verificação. Apresenta a hora
-de captura e a hora da leitura em separado e gráficos das últimas 24 horas
-com médias de 5 minutos.
+A página **Live** consulta as medições a cada minuto. O contador parte da hora
+real da última captura e usa um intervalo de 10 minutos entre fotografias.
+Se o temporizador da câmara tiver outra cadência, define
+`MYCOLAB_PHOTO_INTERVAL_SECONDS` no ambiente do serviço. Ao chegar à hora
+prevista, a página verifica a chegada da fotografia a cada cinco segundos e
+reinicia a contagem depois de carregar a nova imagem. Apresenta a hora de
+captura e a hora da leitura em separado e gráficos das últimas 24 horas com
+médias de 5 minutos.
 No Raspberry Pi, reutiliza a fotografia que a Montra Digital recebe em
 `~/.local/share/mycolab-growbox/latest.jpg` e lê a tabela
 `projects_growboxreading` de `~/montra-digital/db.sqlite3` em modo só de leitura.

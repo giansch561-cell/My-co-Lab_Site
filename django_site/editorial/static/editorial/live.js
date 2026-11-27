@@ -1,12 +1,29 @@
 const painel = document.querySelector("[data-live-url]");
-const intervalo = 60000;
+const intervaloDados = 60000;
+const intervaloEspera = 5000;
 const cores = ["#4c5e43", "#9d5b20"];
-let proxima = Date.now() + intervalo;
+let proximaConsultaDados = Date.now() + intervaloDados;
+let proximaConsultaFoto = 0;
 let ultimaResposta;
+let aConsultar = false;
+
+function proximaFotografia() {
+    return Number(painel.querySelector("[data-live-contador]").dataset.liveProxima) * 1000;
+}
+
+function versaoFotografia() {
+    return painel.querySelector("[data-live-foto]")?.dataset.liveFoto || null;
+}
 
 function atualizarContador() {
     const contador = painel.querySelector("[data-live-contador]");
-    const segundos = Math.max(0, Math.ceil((proxima - Date.now()) / 1000));
+    const espera = painel.querySelector("[data-live-aguarda]");
+    const segundos = Math.ceil((proximaFotografia() - Date.now()) / 1000);
+    contador.hidden = segundos <= 0;
+    espera.hidden = segundos > 0;
+    if (segundos <= 0) {
+        return;
+    }
     const minutos = String(Math.floor(segundos / 60)).padStart(2, "0");
     const resto = String(segundos % 60).padStart(2, "0");
     contador.textContent = minutos + ":" + resto;
@@ -90,29 +107,66 @@ function desenharGraficos() {
     }
 }
 
+async function carregarDados() {
+    const resposta = await fetch(painel.dataset.liveUrl, { cache: "no-store" });
+    if (!resposta.ok) {
+        return;
+    }
+    const dados = await resposta.text();
+    if (dados === ultimaResposta) {
+        return;
+    }
+
+    const fragmento = document.createElement("template");
+    fragmento.innerHTML = dados;
+    const foto = fragmento.content.querySelector("[data-live-foto]");
+    if (foto && foto.dataset.liveFoto !== versaoFotografia()) {
+        const imagem = new Image();
+        imagem.src = foto.getAttribute("src");
+        await imagem.decode();
+    }
+
+    painel.replaceChildren(fragmento.content);
+    ultimaResposta = dados;
+    atualizarContador();
+    desenharGraficos();
+}
+
 async function atualizarLive() {
+    const agora = Date.now();
+    const atualizarDados = agora >= proximaConsultaDados;
+    const verificarFoto = agora >= proximaFotografia() && agora >= proximaConsultaFoto;
+    if (document.hidden || aConsultar || (!atualizarDados && !verificarFoto)) {
+        return;
+    }
+
+    aConsultar = true;
     try {
-        if (!document.hidden) {
-            const resposta = await fetch(painel.dataset.liveUrl, { cache: "no-store" });
+        if (atualizarDados) {
+            proximaConsultaDados = agora + intervaloDados;
+            await carregarDados();
+        } else {
+            proximaConsultaFoto = agora + intervaloEspera;
+            const resposta = await fetch(painel.dataset.liveFotoUrl, { cache: "no-store" });
             if (resposta.ok) {
-                const dados = await resposta.text();
-                if (dados !== ultimaResposta) {
-                    painel.innerHTML = dados;
-                    ultimaResposta = dados;
-                    desenharGraficos();
+                const { versao } = await resposta.json();
+                if (versao && versao !== versaoFotografia()) {
+                    await carregarDados();
                 }
             }
         }
     } catch {
         // Volta a tentar na próxima atualização.
     } finally {
-        proxima = Date.now() + intervalo;
-        atualizarContador();
-        window.setTimeout(atualizarLive, intervalo);
+        aConsultar = false;
     }
 }
 
+atualizarContador();
 desenharGraficos();
 window.addEventListener("resize", desenharGraficos);
-window.setInterval(atualizarContador, 1000);
-window.setTimeout(atualizarLive, intervalo);
+document.addEventListener("visibilitychange", atualizarLive);
+window.setInterval(() => {
+    atualizarContador();
+    atualizarLive();
+}, 1000);

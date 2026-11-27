@@ -125,9 +125,6 @@ msgstr "Inside"
 msgid "Exterior"
 msgstr "Outside"
 
-msgid "Próxima atualização"
-msgstr "Next refresh"
-
 msgid "Entre as duas fotografias"
 msgstr "Between the last two photos"
 
@@ -166,3 +163,9 @@ msgstr "partial record"
 
 msgid "Sem registos suficientes"
 msgstr "Not enough readings"
+
+msgid "Próxima fotografia prevista"
+msgstr "Next scheduled photo"
+
+msgid "À espera da próxima fotografia."
+msgstr "Waiting for the next photo."

@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.http import FileResponse, Http404
+from django.http import FileResponse, Http404, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.cache import cache_control, never_cache
 from django.views.generic import DetailView, ListView
@@ -95,6 +95,12 @@ def fotografia_live(request):
     except OSError as erro:
         raise Http404 from erro
     return FileResponse(foto, content_type="image/jpeg")
+
+
+@never_cache
+def estado_fotografia_live(request):
+    foto = ultima_fotografia()
+    return JsonResponse({"versao": foto["versao"] if foto else None})
 
 
 class CatalogoView(ListView):

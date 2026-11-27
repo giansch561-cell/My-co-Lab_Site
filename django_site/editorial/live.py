@@ -155,7 +155,15 @@ def estado_live():
     foto = ultima_fotografia()
     anterior = _penultima_fotografia(foto)
     fim = foto["capturada_em"] if foto else None
-    painel = {"foto": foto, "foto_anterior": anterior, "leitura": None, "historico": [], "reles": None}
+    proxima = fim + timedelta(seconds=settings.MYCOLAB_PHOTO_INTERVAL_SECONDS) if fim else None
+    painel = {
+        "foto": foto,
+        "foto_anterior": anterior,
+        "proxima_fotografia": proxima,
+        "leitura": None,
+        "historico": [],
+        "reles": None,
+    }
     uri = settings.MYCOLAB_LIVE_READINGS.resolve().as_uri() + "?mode=ro"
     try:
         with closing(sqlite3.connect(uri, uri=True, timeout=1)) as db:

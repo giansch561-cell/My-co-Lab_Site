@@ -3,7 +3,8 @@
 {% block titulo %}Live | My-co-Lab{% endblock %}
 {% block conteudo %}
     <h1>Live</h1>
-    <div class="live-dados" data-live-url="{% url 'editorial:live_dados' %}">
+    <div class="live-dados" data-live-url="{% url 'editorial:live_dados' %}"
+         data-live-foto-url="{% url 'editorial:live_foto_estado' %}">
         {% include 'editorial/live_dados.html' %}
     </div>
     <script src="{% static 'editorial/live.js' %}" defer></script>

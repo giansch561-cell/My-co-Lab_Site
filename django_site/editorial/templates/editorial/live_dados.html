@@ -10,14 +10,15 @@
             </p>
         {% endif %}
         <p class="live-contador">
-            {% translate "Próxima atualização" %}
-            <span data-live-contador>01:00</span>
+            {% translate "Próxima fotografia prevista" %}
+            <span data-live-contador data-live-proxima="{{ proxima_fotografia|date:'U' }}" hidden></span>
+            <span data-live-aguarda>{% translate "À espera da próxima fotografia." %}</span>
         </p>
     </section>
 
     <figure class="live-fotografia">
         {% if foto %}
-            <img src="{% url 'editorial:live_foto' %}?v={{ foto.versao }}" alt="{% translate 'Última fotografia do interior da GrowBox' %}">
+            <img src="{% url 'editorial:live_foto' %}?v={{ foto.versao }}" data-live-foto="{{ foto.versao }}" alt="{% translate 'Última fotografia do interior da GrowBox' %}">
             <figcaption>
                 {% translate "Fotografia de" %}
                 <time datetime="{{ foto.capturada_em|date:'c' }}">{{ foto.capturada_em|date:"SHORT_DATETIME_FORMAT" }}</time>

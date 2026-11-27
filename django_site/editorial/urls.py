@@ -76,5 +76,6 @@ urlpatterns = [
     path("mycobox/live/", views.live, name="live"),
     path("mycobox/live/dados/", views.live, {"parcial": True}, name="live_dados"),
     path("mycobox/live/foto/", views.fotografia_live, name="live_foto"),
+    path("mycobox/live/foto/estado/", views.estado_fotografia_live, name="live_foto_estado"),
     path("bibliografia/", views.bibliografia, name="bibliografia"),
 ]

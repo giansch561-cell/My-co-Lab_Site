@@ -89,4 +89,5 @@ MYCOLAB_LIVE_PHOTO = Path(os.environ.get(
 MYCOLAB_LIVE_READINGS = Path(os.environ.get(
     "MYCOLAB_LIVE_READINGS", Path.home() / "montra-digital/db.sqlite3"
 ))
+MYCOLAB_PHOTO_INTERVAL_SECONDS = int(os.environ.get("MYCOLAB_PHOTO_INTERVAL_SECONDS", "600"))
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

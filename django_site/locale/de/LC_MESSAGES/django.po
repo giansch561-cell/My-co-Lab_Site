@@ -124,9 +124,6 @@ msgstr "Innen"
 msgid "Exterior"
 msgstr "Aussen"
 
-msgid "Próxima atualização"
-msgstr "Nächste Aktualisierung"
-
 msgid "Entre as duas fotografias"
 msgstr "Zwischen den beiden Fotos"
 
@@ -165,3 +162,9 @@ msgstr "Teilerfassung"
 
 msgid "Sem registos suficientes"
 msgstr "Zu wenige Messwerte"
+
+msgid "Próxima fotografia prevista"
+msgstr "Nächste geplante Aufnahme"
+
+msgid "À espera da próxima fotografia."
+msgstr "Warten auf das nächste Foto."
