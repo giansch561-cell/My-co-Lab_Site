@@ -105,7 +105,11 @@ class IdiomasTest(TestCase):
 
 class PaginaInicialTest(TestCase):
     def test_ficha_mycobox_no_inicio_abre_a_pagina_das_experiencias(self):
-        for prefixo in ("", "/de", "/en"):
+        for prefixo, introducao in (
+            ("", "Aprende a montar a tua GrowBox"),
+            ("/de", "Hier lernst du, wie du deine GrowBox"),
+            ("/en", "Learn how to build your GrowBox"),
+        ):
             with self.subTest(prefixo=prefixo):
                 inicio = self.client.get(f"{prefixo}/")
                 self.assertContains(inicio, 'class="cartao"', count=4)
@@ -115,22 +119,24 @@ class PaginaInicialTest(TestCase):
                 self.assertNotContains(inicio, f'class="cartao" href="{prefixo}/growbox/"')
 
                 mycobox = self.client.get(f"{prefixo}/mycobox/")
+                abertura, _ = mycobox.content.decode().split("</section>", 1)
+                self.assertIn(introducao, abertura)
+                self.assertIn('src="/static/editorial/abertura-growbox.webp"', abertura)
                 for caminho in ("mycobox/timelapses/", "mycobox/live/", "growbox/"):
                     self.assertContains(mycobox, f'href="{prefixo}/{caminho}"')
 
     def test_growbox_apresenta_o_projeto_enquanto_nao_ha_guias(self):
         GuiaGrowBox.objects.create(titulo="Guia em rascunho", slug="rascunho")
-        for prefixo, introducao, aviso in (
-            ("", "Aprende a montar a tua GrowBox", "Os primeiros guias estão em preparação."),
-            ("/de", "Hier lernst du, wie du deine GrowBox", "Die ersten Anleitungen sind in Vorbereitung."),
-            ("/en", "Learn how to build your GrowBox", "The first guides are in preparation."),
+        for prefixo, aviso in (
+            ("", "Os primeiros guias estão em preparação."),
+            ("/de", "Die ersten Anleitungen sind in Vorbereitung."),
+            ("/en", "The first guides are in preparation."),
         ):
             with self.subTest(prefixo=prefixo):
                 catalogo = self.client.get(f"{prefixo}/growbox/")
                 self.assertContains(catalogo, "<h1>GrowBox</h1>")
                 abertura, corpo = catalogo.content.decode().split("</section>", 1)
-                self.assertIn(introducao, abertura)
-                self.assertIn('src="/static/editorial/abertura-growbox.webp"', abertura)
+                self.assertIn('src="/static/editorial/mycobox.webp"', abertura)
                 self.assertIn(aviso, corpo)
                 self.assertContains(catalogo, f'href="{prefixo}/mycobox/"')
                 self.assertNotContains(catalogo, "Guia em rascunho")
@@ -146,7 +152,7 @@ class PaginaInicialTest(TestCase):
         )
         catalogo = self.client.get("/en/growbox/")
         self.assertContains(catalogo, "<h1>GrowBox</h1>")
-        self.assertContains(catalogo, "Learn how to build your GrowBox")
+        self.assertNotContains(catalogo, "Learn how to build your GrowBox")
         self.assertNotContains(catalogo, "The first guides are in preparation.")
         _, fichas = catalogo.content.decode().split("</section>", 1)
         self.assertIn('<ul class="grelha">', fichas)

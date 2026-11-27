@@ -1,5 +1,11 @@
 {% extends 'editorial/catalogo_abertura.html' %}
-{% load i18n %}
+{% load i18n idiomas %}
+
+{% block descricao_catalogo %}
+    {% with texto=pagina|texto_localizado:"texto" %}
+        {% if texto %}<div class="leitura">{{ texto|linebreaks }}</div>{% endif %}
+    {% endwith %}
+{% endblock %}
 
 {% block catalogo_vazio %}
     <div class="leitura">

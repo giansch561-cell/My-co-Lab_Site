@@ -6,6 +6,7 @@
         <h1>{{ titulo }}</h1>
         {% block introducao %}{% endblock %}
     {% endblock %}
+    {% block descricao_catalogo %}{% endblock %}
     {% if fichas %}
         <ul class="grelha">
             {% for ficha in fichas %}

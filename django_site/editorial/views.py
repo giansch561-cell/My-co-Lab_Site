@@ -22,7 +22,7 @@ def inicio(request):
     cartoes.append({
         "titulo": Pagina.Secao.MYCOBOX.label,
         "rota": "editorial:mycobox",
-        "pagina": paginas.get(Pagina.Secao.GROWBOX),
+        "pagina": paginas.get(Pagina.Secao.MYCOBOX),
         "imagem_padrao": "editorial/growbox.webp",
     })
     recentes = []
@@ -44,7 +44,7 @@ def inicio(request):
     )
 
 
-def pagina(request, secao, titulo, imagem_padrao=""):
+def pagina(request, secao, titulo, imagem_padrao="", imagem_alt_padrao="", introducao_padrao=""):
     return render(
         request,
         "editorial/pagina.html",
@@ -53,6 +53,8 @@ def pagina(request, secao, titulo, imagem_padrao=""):
             "titulo": titulo,
             "pagina": Pagina.objects.filter(secao=secao).first(),
             "imagem_padrao": imagem_padrao,
+            "imagem_alt_padrao": imagem_alt_padrao,
+            "introducao_padrao": introducao_padrao,
             "foto_live": ultima_fotografia() if secao == Pagina.Secao.MYCOBOX else None,
         },
     )

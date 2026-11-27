@@ -24,8 +24,8 @@ Abre `http://127.0.0.1:8000/` para ver o site e
 
 - **Páginas.** Escolhe a secção para acrescentar os seus textos e a imagem. Nas
   secções À volta dos cogumelos, Cultivo e Cogumelos, a imagem é usada no
-  respetivo cartão do Início. A imagem da secção GrowBox é usada na ficha
-  **MycoBox** do Início. O timelapse é apresentado na MycoBox.
+  respetivo cartão do Início. A secção **MycoBox** fornece a imagem para o seu
+  cartão do Início e apresenta o timelapse.
 - **À volta dos cogumelos e Cogumelos.** A introdução e a imagem de cada secção
   também personalizam a abertura do respetivo catálogo. Sem esses dados, a abertura usa os
   textos e a imagem incluídos no site.

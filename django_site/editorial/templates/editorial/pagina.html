@@ -6,7 +6,7 @@
         <section class="{% if pagina.imagem or imagem_padrao %}abertura{% if secao == 'sobre' %} abertura-sobre{% endif %}{% else %}leitura{% endif %}">
             <div class="abertura-texto">
                 <h1>{{ titulo }}</h1>
-                {% with introducao=pagina|texto_localizado:"introducao" %}
+                {% with introducao=pagina|texto_localizado:"introducao"|default:introducao_padrao %}
                     {% if introducao %}<div class="introducao">{{ introducao|linebreaks }}</div>{% endif %}
                 {% endwith %}
                 {% if secao == 'sobre' and texto %}
@@ -16,7 +16,7 @@
             {% if pagina.imagem %}
                 <img class="abertura-imagem" src="{{ pagina.imagem.url }}" alt="{{ pagina|texto_localizado:'imagem_alt' }}">
             {% elif imagem_padrao %}
-                <img class="abertura-imagem" src="{% static imagem_padrao %}" width="1400" height="933" alt="{% translate 'Esboço dos cogumelos-ostra a crescer no bloco de cultivo, dentro da GrowBox.' %}">
+                <img class="abertura-imagem" src="{% static imagem_padrao %}" alt="{{ imagem_alt_padrao }}">
             {% endif %}
         </section>
         {% if secao != 'sobre' and texto %}

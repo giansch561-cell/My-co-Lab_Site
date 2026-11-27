@@ -94,13 +94,10 @@ urlpatterns = [
             extra_context={
                 "titulo": "GrowBox",
                 "secao": "growbox",
-                "introducao_padrao": _(
-                    "Aprende a montar a tua GrowBox por módulos, com guias sobre "
-                    "câmara e timelapse, sensores, ventilação e humidificação."
-                ),
-                "imagem_padrao": "editorial/abertura-growbox.webp",
+                "introducao_padrao": "",
+                "imagem_padrao": "editorial/mycobox.webp",
                 "imagem_alt_padrao": _(
-                    "Ilustração de uma GrowBox com cogumelos-ostra, câmara e sensor."
+                    "Esboço dos cogumelos-ostra a crescer no bloco de cultivo, dentro da GrowBox."
                 ),
             },
         ),
@@ -114,7 +111,18 @@ urlpatterns = [
     path(
         "mycobox/",
         views.pagina,
-        {"secao": "mycobox", "titulo": "MycoBox", "imagem_padrao": "editorial/mycobox.webp"},
+        {
+            "secao": "mycobox",
+            "titulo": "MycoBox",
+            "introducao_padrao": _(
+                "Aprende a montar a tua GrowBox por módulos, com guias sobre "
+                "câmara e timelapse, sensores, ventilação e humidificação."
+            ),
+            "imagem_padrao": "editorial/abertura-growbox.webp",
+            "imagem_alt_padrao": _(
+                "Ilustração de uma GrowBox com cogumelos-ostra, câmara e sensor."
+            ),
+        },
         name="mycobox",
     ),
     path("mycobox/timelapses/", views.timelapses, name="timelapses"),

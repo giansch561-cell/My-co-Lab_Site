@@ -5,9 +5,9 @@
     <section class="abertura">
         <div class="abertura-texto">
             <h1>{{ titulo }}</h1>
-            <div class="introducao">
-                {{ pagina|texto_localizado:"introducao"|default:introducao_padrao|linebreaks }}
-            </div>
+            {% with introducao=pagina|texto_localizado:"introducao"|default:introducao_padrao %}
+                {% if introducao %}<div class="introducao">{{ introducao|linebreaks }}</div>{% endif %}
+            {% endwith %}
         </div>
         {% if pagina.imagem %}
             <img class="abertura-imagem" src="{{ pagina.imagem.url }}" alt="{{ pagina|texto_localizado:'imagem_alt' }}" fetchpriority="high">
