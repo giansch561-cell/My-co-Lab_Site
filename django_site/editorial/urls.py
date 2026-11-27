@@ -41,7 +41,18 @@ urlpatterns = [
         "cogumelos/",
         views.CatalogoView.as_view(
             queryset=cogumelos,
-            extra_context={"titulo": _("Cogumelos"), "secao": "cogumelos"},
+            template_name="editorial/catalogo_abertura.html",
+            secao_pagina=Pagina.Secao.COGUMELOS,
+            extra_context={
+                "titulo": _("Cogumelos"),
+                "secao": "cogumelos",
+                "introducao_padrao": _(
+                    "Explora as fichas para conhecer diferentes cogumelos, os seus habitats "
+                    "e algumas curiosidades sobre cada um."
+                ),
+                "imagem_padrao": "editorial/abertura-cogumelos.webp",
+                "imagem_alt_padrao": _("Mesa de estudo com cogumelos, livros ilustrados, cadernos e uma lupa."),
+            },
         ),
         name="cogumelos",
     ),

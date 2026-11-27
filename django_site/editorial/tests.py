@@ -196,7 +196,7 @@ class PaginaInicialTest(TestCase):
         self.assertEqual(artigo.publicado_em, primeira_publicacao)
 
 
-class CatalogoArtigosTest(TestCase):
+class CatalogoAberturaTest(TestCase):
     def test_abertura_traduzida_fica_acima_das_fichas(self):
         Artigo.objects.create(titulo="Artigo publicado", slug="publicado", publicado=True)
         for prefixo, frase in (
@@ -212,6 +212,27 @@ class CatalogoArtigosTest(TestCase):
                 self.assertIn('class="abertura-texto"', abertura)
                 self.assertIn('src="/static/editorial/abertura-artigos.webp"', abertura)
                 self.assertIn('<ul class="grelha">', fichas)
+
+    def test_catalogo_cogumelos_mostra_mesa_de_estudo_acima_das_fichas(self):
+        Cogumelo.objects.create(
+            titulo="Cogumelo-ostra",
+            slug="cogumelo-ostra",
+            esboco="esbocos/cogumelo-ostra.webp",
+            publicado=True,
+        )
+        for prefixo, frase in (
+            ("", "Explora as fichas para conhecer diferentes cogumelos"),
+            ("/de", "Entdecke in den Steckbriefen verschiedene Pilze"),
+            ("/en", "Explore the profiles to learn about different mushrooms"),
+        ):
+            with self.subTest(prefixo=prefixo):
+                pagina = self.client.get(f"{prefixo}/cogumelos/")
+                self.assertContains(pagina, f'href="{prefixo}/cogumelos/cogumelo-ostra/"')
+                abertura, fichas = pagina.content.decode().split("</section>", 1)
+                self.assertIn(frase, abertura)
+                self.assertIn('src="/static/editorial/abertura-cogumelos.webp"', abertura)
+                self.assertIn('<ul class="grelha">', fichas)
+                self.assertIn('src="/media/esbocos/cogumelo-ostra.webp"', fichas)
 
     def test_abertura_usa_introducao_e_imagem_guardadas(self):
         Pagina.objects.create(

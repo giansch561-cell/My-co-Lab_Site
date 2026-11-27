@@ -188,3 +188,14 @@ msgstr ""
 
 msgid "Cogumelos entre musgo e folhas caídas no chão do bosque."
 msgstr "Pilze zwischen Moos und Herbstlaub auf dem Waldboden."
+
+msgid ""
+"Explora as fichas para conhecer diferentes cogumelos, os seus habitats e "
+"algumas curiosidades sobre cada um."
+msgstr ""
+"Entdecke in den Steckbriefen verschiedene Pilze, ihre Lebensräume und "
+"Wissenswertes zu jedem Pilz."
+
+msgid "Mesa de estudo com cogumelos, livros ilustrados, cadernos e uma lupa."
+msgstr ""
+"Arbeitstisch mit Pilzen, illustrierten Büchern, Notizheften und einer Lupe."

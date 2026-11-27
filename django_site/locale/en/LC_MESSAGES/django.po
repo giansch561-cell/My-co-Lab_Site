@@ -187,3 +187,15 @@ msgstr "Discover what a mushroom is, how fungi live and how a mushroom forms."
 
 msgid "Cogumelos entre musgo e folhas caídas no chão do bosque."
 msgstr "Mushrooms among moss and fallen leaves on the woodland floor."
+
+msgid ""
+"Explora as fichas para conhecer diferentes cogumelos, os seus habitats e "
+"algumas curiosidades sobre cada um."
+msgstr ""
+"Explore the profiles to learn about different mushrooms, where they grow and"
+" what makes each one distinctive."
+
+msgid "Mesa de estudo com cogumelos, livros ilustrados, cadernos e uma lupa."
+msgstr ""
+"Study desk with mushrooms, illustrated books, notebooks and a magnifying "
+"glass."

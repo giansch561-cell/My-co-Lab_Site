@@ -26,8 +26,8 @@ Abre `http://127.0.0.1:8000/` para ver o site e
   secções À volta dos cogumelos, Cultivo e Cogumelos, a imagem é usada no
   respetivo cartão do Início. A imagem da secção GrowBox é usada na ficha
   **MycoBox** do Início. O timelapse é apresentado na MycoBox.
-- **À volta dos cogumelos.** A introdução e a imagem dessa secção também
-  personalizam a abertura do catálogo. Sem esses dados, a abertura usa os
+- **À volta dos cogumelos e Cogumelos.** A introdução e a imagem de cada secção
+  também personalizam a abertura do respetivo catálogo. Sem esses dados, a abertura usa os
   textos e a imagem incluídos no site.
 - **Artigos, Cogumelos, Métodos de cultivo e Guias GrowBox.** Cria as fichas como rascunho.
   Marca **Publicado** quando estiverem prontas. Nos cogumelos, o esboço aparece
