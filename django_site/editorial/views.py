@@ -7,24 +7,28 @@ from django.views.generic import DetailView, ListView
 from .live import estado_live, ultima_fotografia
 from .models import Artigo, Cogumelo, Fonte, GuiaGrowBox, MetodoCultivo, Pagina, Timelapse
 
+IMAGEM_ABERTURA_ARTIGOS = "editorial/abertura-artigos.webp"
+IMAGEM_ABERTURA_CULTIVO = "editorial/abertura-cultivo.webp"
+IMAGEM_ABERTURA_MYCOBOX = "editorial/abertura-growbox.webp"
+
 
 def inicio(request):
     secoes = (
-        (Pagina.Secao.ARTIGOS, "editorial:artigos"),
-        (Pagina.Secao.CULTIVO, "editorial:cultivo"),
-        (Pagina.Secao.COGUMELOS, "editorial:cogumelos"),
+        (Pagina.Secao.ARTIGOS, "editorial:artigos", IMAGEM_ABERTURA_ARTIGOS),
+        (Pagina.Secao.CULTIVO, "editorial:cultivo", IMAGEM_ABERTURA_CULTIVO),
+        (Pagina.Secao.COGUMELOS, "editorial:cogumelos", ""),
+        (Pagina.Secao.MYCOBOX, "editorial:mycobox", IMAGEM_ABERTURA_MYCOBOX),
     )
     paginas = Pagina.objects.in_bulk(field_name="secao")
     cartoes = [
-        {"titulo": secao.label, "rota": rota, "pagina": paginas.get(secao)}
-        for secao, rota in secoes
+        {
+            "titulo": secao.label,
+            "rota": rota,
+            "pagina": paginas.get(secao),
+            "imagem_padrao": imagem_padrao,
+        }
+        for secao, rota, imagem_padrao in secoes
     ]
-    cartoes.append({
-        "titulo": Pagina.Secao.MYCOBOX.label,
-        "rota": "editorial:mycobox",
-        "pagina": paginas.get(Pagina.Secao.MYCOBOX),
-        "imagem_padrao": "editorial/growbox.webp",
-    })
     recentes = []
     for modelo in (Artigo, Cogumelo, MetodoCultivo, GuiaGrowBox):
         recentes.extend(

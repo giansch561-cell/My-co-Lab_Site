@@ -104,6 +104,27 @@ class IdiomasTest(TestCase):
 
 
 class PaginaInicialTest(TestCase):
+    def test_fichas_do_inicio_usam_as_imagens_das_secoes(self):
+        secoes = (
+            (Pagina.Secao.ARTIGOS, "/a-volta-dos-cogumelos/", "abertura-artigos.webp"),
+            (Pagina.Secao.CULTIVO, "/cultivo/", "abertura-cultivo.webp"),
+            (Pagina.Secao.MYCOBOX, "/mycobox/", "abertura-growbox.webp"),
+        )
+        inicio = self.client.get("/").content.decode()
+        for secao, destino, ficheiro in secoes:
+            with self.subTest(secao=secao):
+                cartao = inicio.split(f'<a class="cartao" href="{destino}">', 1)[1].split("</a>", 1)[0]
+                self.assertIn(f'src="/static/editorial/{ficheiro}"', cartao)
+                Pagina.objects.create(secao=secao, imagem=f"paginas/{secao}.webp")
+
+        inicio = self.client.get("/en/").content.decode()
+        for secao, destino, _ in secoes:
+            with self.subTest(secao=secao):
+                cartao = inicio.split(f'<a class="cartao" href="/en{destino}">', 1)[1].split("</a>", 1)[0]
+                imagem = f'src="/media/paginas/{secao}.webp"'
+                self.assertIn(imagem, cartao)
+                self.assertContains(self.client.get(f"/en{destino}"), imagem)
+
     def test_ficha_mycobox_no_inicio_abre_a_pagina_das_experiencias(self):
         for prefixo, introducao in (
             ("", "acompanha-se o crescimento dos cogumelos em cultivo na página Live"),
@@ -115,7 +136,7 @@ class PaginaInicialTest(TestCase):
                 self.assertContains(inicio, 'class="cartao"', count=4)
                 self.assertContains(inicio, f'class="cartao" href="{prefixo}/mycobox/"')
                 self.assertContains(inicio, '<span class="cartao-titulo">MycoBox</span>')
-                self.assertContains(inicio, "/static/editorial/growbox.webp")
+                self.assertContains(inicio, "/static/editorial/abertura-growbox.webp")
                 self.assertNotContains(inicio, f'class="cartao" href="{prefixo}/growbox/"')
 
                 mycobox = self.client.get(f"{prefixo}/mycobox/")

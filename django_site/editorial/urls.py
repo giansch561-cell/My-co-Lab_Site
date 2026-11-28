@@ -29,7 +29,7 @@ urlpatterns = [
                     "influenciam o seu aparecimento e como decorre o ciclo de vida de um fungo, "
                     "do esporo à formação de um novo cogumelo."
                 ),
-                "imagem_padrao": "editorial/abertura-artigos.webp",
+                "imagem_padrao": views.IMAGEM_ABERTURA_ARTIGOS,
                 "imagem_alt_padrao": _("Cogumelos entre musgo e folhas caídas no chão do bosque."),
             },
         ),
@@ -76,7 +76,7 @@ urlpatterns = [
                 "introducao_padrao": _(
                     "Em cada ficha, explica-se brevemente um método de cultivo de cogumelos."
                 ),
-                "imagem_padrao": "editorial/abertura-cultivo.webp",
+                "imagem_padrao": views.IMAGEM_ABERTURA_CULTIVO,
                 "imagem_alt_padrao": _("Mãos de um adulto e de uma criança a colher shiitake de troncos."),
             },
         ),
@@ -120,7 +120,7 @@ urlpatterns = [
                 "Nesta secção, acompanha-se o crescimento dos cogumelos em cultivo na página Live. "
                 "Nos timelapses, vê-se como cresceram os cogumelos de experiências anteriores."
             ),
-            "imagem_padrao": "editorial/abertura-growbox.webp",
+            "imagem_padrao": views.IMAGEM_ABERTURA_MYCOBOX,
             "imagem_alt_padrao": _(
                 "Ilustração de uma GrowBox com cogumelos-ostra, câmara e sensor."
             ),
