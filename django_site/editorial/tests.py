@@ -106,9 +106,9 @@ class IdiomasTest(TestCase):
 class PaginaInicialTest(TestCase):
     def test_ficha_mycobox_no_inicio_abre_a_pagina_das_experiencias(self):
         for prefixo, introducao in (
-            ("", "Aprende a montar a tua GrowBox"),
-            ("/de", "Hier lernst du, wie du deine GrowBox"),
-            ("/en", "Learn how to build your GrowBox"),
+            ("", "explica-se como montar uma GrowBox"),
+            ("/de", "Hier wird erklärt, wie sich eine GrowBox"),
+            ("/en", "This section explains how to build a GrowBox"),
         ):
             with self.subTest(prefixo=prefixo):
                 inicio = self.client.get(f"{prefixo}/")
@@ -152,7 +152,7 @@ class PaginaInicialTest(TestCase):
         )
         catalogo = self.client.get("/en/growbox/")
         self.assertContains(catalogo, "<h1>GrowBox</h1>")
-        self.assertNotContains(catalogo, "Learn how to build your GrowBox")
+        self.assertNotContains(catalogo, "This section explains how to build a GrowBox")
         self.assertNotContains(catalogo, "The first guides are in preparation.")
         _, fichas = catalogo.content.decode().split("</section>", 1)
         self.assertIn('<ul class="grelha">', fichas)
@@ -211,9 +211,9 @@ class CatalogoAberturaTest(TestCase):
     def test_abertura_traduzida_fica_acima_das_fichas(self):
         Artigo.objects.create(titulo="Artigo publicado", slug="publicado", publicado=True)
         for prefixo, frase in (
-            ("", "Descobre o que é um cogumelo"),
-            ("/de", "Entdecke, was ein Pilz ist"),
-            ("/en", "Discover what a mushroom is"),
+            ("", "Nesta secção, descobre-se em que habitats crescem"),
+            ("/de", "Dieser Bereich erklärt, in welchen Lebensräumen Pilze wachsen"),
+            ("/en", "This section looks at where they grow"),
         ):
             with self.subTest(prefixo=prefixo):
                 pagina = self.client.get(f"{prefixo}/a-volta-dos-cogumelos/")
@@ -232,9 +232,9 @@ class CatalogoAberturaTest(TestCase):
             publicado=True,
         )
         for prefixo, frase in (
-            ("", "Explora as fichas para conhecer diferentes cogumelos"),
-            ("/de", "Entdecke in den Steckbriefen verschiedene Pilze"),
-            ("/en", "Explore the profiles to learn about different mushrooms"),
+            ("", "Cada ficha apresenta um cogumelo"),
+            ("/de", "Jeder Steckbrief stellt einen Pilz vor"),
+            ("/en", "Each profile introduces a mushroom"),
         ):
             with self.subTest(prefixo=prefixo):
                 pagina = self.client.get(f"{prefixo}/cogumelos/")
@@ -248,9 +248,9 @@ class CatalogoAberturaTest(TestCase):
     def test_catalogo_cultivo_mostra_introducao_traduzida_e_imagem_acima_dos_metodos(self):
         MetodoCultivo.objects.create(titulo="Cultivo em saco", slug="em-saco", publicado=True)
         for prefixo, frase in (
-            ("", "Descobre diferentes formas de cultivar cogumelos."),
-            ("/de", "Entdecke verschiedene Möglichkeiten, Pilze anzubauen."),
-            ("/en", "Discover different ways to grow mushrooms."),
+            ("", "Em cada ficha, explica-se brevemente um método de cultivo de cogumelos."),
+            ("/de", "Jeder Eintrag erklärt kurz eine Methode der Pilzzucht."),
+            ("/en", "Each entry briefly explains a method of growing mushrooms."),
         ):
             with self.subTest(prefixo=prefixo):
                 pagina = self.client.get(f"{prefixo}/cultivo/")
@@ -271,7 +271,7 @@ class CatalogoAberturaTest(TestCase):
         pagina = self.client.get("/en/a-volta-dos-cogumelos/")
         self.assertContains(pagina, "The editor&#x27;s introduction.")
         self.assertContains(pagina, 'src="/media/paginas/artigos.webp" alt="Woodland mushrooms"')
-        self.assertNotContains(pagina, "Discover what a mushroom is")
+        self.assertNotContains(pagina, "This section looks at where they grow")
 
 
 class MycoBoxTest(TestCase):

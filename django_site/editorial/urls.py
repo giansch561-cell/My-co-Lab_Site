@@ -24,7 +24,10 @@ urlpatterns = [
                 "titulo": _("À volta dos cogumelos"),
                 "secao": "artigos",
                 "introducao_padrao": _(
-                    "Descobre o que é um cogumelo, como vive um fungo e como se forma um cogumelo."
+                    "Porque é que há cogumelos em certos lugares e em certas alturas do ano? "
+                    "Nesta secção, descobre-se em que habitats crescem, como a temperatura e a humidade "
+                    "influenciam o seu aparecimento e como decorre o ciclo de vida de um fungo, "
+                    "do esporo à formação de um novo cogumelo."
                 ),
                 "imagem_padrao": "editorial/abertura-artigos.webp",
                 "imagem_alt_padrao": _("Cogumelos entre musgo e folhas caídas no chão do bosque."),
@@ -47,8 +50,8 @@ urlpatterns = [
                 "titulo": _("Cogumelos"),
                 "secao": "cogumelos",
                 "introducao_padrao": _(
-                    "Explora as fichas para conhecer diferentes cogumelos, os seus habitats "
-                    "e algumas curiosidades sobre cada um."
+                    "Cada ficha apresenta um cogumelo e reúne informação breve sobre o seu habitat "
+                    "e algumas curiosidades."
                 ),
                 "imagem_padrao": "editorial/abertura-cogumelos.webp",
                 "imagem_alt_padrao": _("Mesa de estudo com cogumelos, livros ilustrados, cadernos e uma lupa."),
@@ -71,8 +74,7 @@ urlpatterns = [
                 "titulo": _("Cultivo"),
                 "secao": "cultivo",
                 "introducao_padrao": _(
-                    "Descobre diferentes formas de cultivar cogumelos. "
-                    "Em cada ficha encontras uma breve explicação do método."
+                    "Em cada ficha, explica-se brevemente um método de cultivo de cogumelos."
                 ),
                 "imagem_padrao": "editorial/abertura-cultivo.webp",
                 "imagem_alt_padrao": _("Mãos de um adulto e de uma criança a colher shiitake de troncos."),
@@ -115,7 +117,7 @@ urlpatterns = [
             "secao": "mycobox",
             "titulo": "MycoBox",
             "introducao_padrao": _(
-                "Aprende a montar a tua GrowBox por módulos, com guias sobre "
+                "Nesta secção, explica-se como montar uma GrowBox por módulos, com guias sobre "
                 "câmara e timelapse, sensores, ventilação e humidificação."
             ),
             "imagem_padrao": "editorial/abertura-growbox.webp",

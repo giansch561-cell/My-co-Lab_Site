@@ -41,6 +41,9 @@ Abre `http://127.0.0.1:8000/` para ver o site e
 
 ## Idiomas
 
+Nos textos informativos, usa-se a terceira pessoa do singular, com formulações
+impessoais como «descobre-se» ou «encontra-se». As traduções seguem o mesmo tom.
+
 O seletor **PT · DE · EN** no cabeçalho abre a mesma página na língua escolhida.
 O português mantém os endereços originais. As versões alemã e inglesa usam os
 prefixos `/de/` e `/en/`.
