@@ -117,8 +117,8 @@ urlpatterns = [
             "secao": "mycobox",
             "titulo": "MycoBox",
             "introducao_padrao": _(
-                "Nesta secção, explica-se como montar uma GrowBox por módulos, com guias sobre "
-                "câmara e timelapse, sensores, ventilação e humidificação."
+                "Nesta secção, acompanha-se o crescimento dos cogumelos em cultivo na página Live. "
+                "Nos timelapses, vê-se como cresceram os cogumelos de experiências anteriores."
             ),
             "imagem_padrao": "editorial/abertura-growbox.webp",
             "imagem_alt_padrao": _(

@@ -106,9 +106,9 @@ class IdiomasTest(TestCase):
 class PaginaInicialTest(TestCase):
     def test_ficha_mycobox_no_inicio_abre_a_pagina_das_experiencias(self):
         for prefixo, introducao in (
-            ("", "explica-se como montar uma GrowBox"),
-            ("/de", "Hier wird erklärt, wie sich eine GrowBox"),
-            ("/en", "This section explains how to build a GrowBox"),
+            ("", "acompanha-se o crescimento dos cogumelos em cultivo na página Live"),
+            ("/de", "Auf der Live-Seite lässt sich das Wachstum der Pilze"),
+            ("/en", "The Live page shows how the current crop is growing"),
         ):
             with self.subTest(prefixo=prefixo):
                 inicio = self.client.get(f"{prefixo}/")
@@ -152,7 +152,7 @@ class PaginaInicialTest(TestCase):
         )
         catalogo = self.client.get("/en/growbox/")
         self.assertContains(catalogo, "<h1>GrowBox</h1>")
-        self.assertNotContains(catalogo, "This section explains how to build a GrowBox")
+        self.assertNotContains(catalogo, "The Live page shows how the current crop is growing")
         self.assertNotContains(catalogo, "The first guides are in preparation.")
         _, fichas = catalogo.content.decode().split("</section>", 1)
         self.assertIn('<ul class="grelha">', fichas)
