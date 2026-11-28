@@ -4,7 +4,7 @@
 {% block conteudo %}
     <h1>{% translate "Timelapses" %}</h1>
     {% for timelapse in timelapses %}
-        {% include 'editorial/timelapse_video.html' with titulo=timelapse|texto_localizado:"titulo" video=timelapse.video data=timelapse.data only %}
+        {% include 'editorial/timelapse_video.html' with titulo=timelapse|texto_localizado:"titulo" video=timelapse.video_localizado data=timelapse.data only %}
     {% endfor %}
     {% if pagina.timelapse %}
         {% translate "Primeira colheita" as titulo_colheita %}

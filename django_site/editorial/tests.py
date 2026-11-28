@@ -297,6 +297,28 @@ class CatalogoAberturaTest(TestCase):
 
 
 class MycoBoxTest(TestCase):
+    def test_timelapse_apresenta_o_video_da_lingua_quando_disponivel(self):
+        Timelapse.objects.create(titulo="Vídeo anterior", video="videos/anterior.mp4")
+        Timelapse.objects.create(
+            titulo="Primeira frutificação",
+            titulo_de="Erste Fruchtung",
+            titulo_en="First fruiting",
+            video="videos/colheita-pt.mp4",
+            video_de="videos/colheita-de.mp4",
+            video_en="videos/colheita-en.mp4",
+        )
+        for prefixo, titulo, video in (
+            ("", "Primeira frutificação", "colheita-pt.mp4"),
+            ("/de", "Erste Fruchtung", "colheita-de.mp4"),
+            ("/en", "First fruiting", "colheita-en.mp4"),
+        ):
+            with self.subTest(prefixo=prefixo):
+                galeria = self.client.get(f"{prefixo}/mycobox/timelapses/")
+                self.assertContains(galeria, f"<h2>{titulo}</h2>", count=1)
+                self.assertContains(galeria, f'src="/media/videos/{video}"', count=1)
+                self.assertContains(galeria, 'src="/media/videos/anterior.mp4"', count=1)
+                self.assertContains(galeria, "<video ", count=2)
+
     def test_fichas_e_galeria_aproveitam_o_timelapse_anterior(self):
         Pagina.objects.create(secao=Pagina.Secao.MYCOBOX, timelapse="videos/colheita.mp4")
         Timelapse.objects.create(titulo="Nova experiência", titulo_en="New experiment", video="videos/novo.mp4")

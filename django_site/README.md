@@ -58,6 +58,10 @@ Depois de editar os ficheiros `.po` da interface, recompila-os com
 
 A página **Timelapses** apresenta o vídeo da primeira colheita, quando já
 carregado em **Páginas → MycoBox**, e os vídeos acrescentados em **Timelapses**.
+Para uma experiência em vários idiomas, carrega o vídeo em português no campo
+principal e as traduções nas secções **Alemão** e **Inglês** da mesma ficha.
+Quando há uma versão no idioma selecionado, apresenta-se essa versão. As fichas
+com um só vídeo apresentam o original em todos os idiomas.
 
 A página **Live** consulta as medições a cada minuto. O contador parte da hora
 real da última captura e usa um intervalo de 10 minutos entre fotografias.

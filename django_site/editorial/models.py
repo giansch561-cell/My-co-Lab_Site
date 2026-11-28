@@ -2,7 +2,7 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import get_language, gettext_lazy as _
 
 
 class ConteudoTraduzivel(models.Model):
@@ -155,6 +155,18 @@ class Timelapse(models.Model):
     titulo_de = models.CharField("título — alemão", max_length=160, blank=True)
     titulo_en = models.CharField("título — inglês", max_length=160, blank=True)
     video = models.FileField(upload_to="videos/", validators=[FileExtensionValidator(["mp4", "webm"])])
+    video_de = models.FileField(
+        "vídeo — alemão",
+        upload_to="videos/",
+        blank=True,
+        validators=[FileExtensionValidator(["mp4", "webm"])],
+    )
+    video_en = models.FileField(
+        "vídeo — inglês",
+        upload_to="videos/",
+        blank=True,
+        validators=[FileExtensionValidator(["mp4", "webm"])],
+    )
     data = models.DateField("data da experiência", blank=True, null=True)
 
     class Meta:
@@ -162,3 +174,6 @@ class Timelapse(models.Model):
 
     def __str__(self):
         return self.titulo
+
+    def video_localizado(self):
+        return getattr(self, f"video_{get_language()}", None) or self.video
