@@ -9,6 +9,7 @@ from .models import Artigo, Cogumelo, Fonte, GuiaGrowBox, MetodoCultivo, Pagina,
 
 IMAGEM_ABERTURA_ARTIGOS = "editorial/abertura-artigos.webp"
 IMAGEM_ABERTURA_CULTIVO = "editorial/abertura-cultivo.webp"
+IMAGEM_ABERTURA_COGUMELOS = "editorial/abertura-cogumelos.webp"
 IMAGEM_ABERTURA_MYCOBOX = "editorial/abertura-growbox.webp"
 
 
@@ -16,7 +17,7 @@ def inicio(request):
     secoes = (
         (Pagina.Secao.ARTIGOS, "editorial:artigos", IMAGEM_ABERTURA_ARTIGOS),
         (Pagina.Secao.CULTIVO, "editorial:cultivo", IMAGEM_ABERTURA_CULTIVO),
-        (Pagina.Secao.COGUMELOS, "editorial:cogumelos", ""),
+        (Pagina.Secao.COGUMELOS, "editorial:cogumelos", IMAGEM_ABERTURA_COGUMELOS),
         (Pagina.Secao.MYCOBOX, "editorial:mycobox", IMAGEM_ABERTURA_MYCOBOX),
     )
     paginas = Pagina.objects.in_bulk(field_name="secao")

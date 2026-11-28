@@ -108,6 +108,7 @@ class PaginaInicialTest(TestCase):
         secoes = (
             (Pagina.Secao.ARTIGOS, "/a-volta-dos-cogumelos/", "abertura-artigos.webp"),
             (Pagina.Secao.CULTIVO, "/cultivo/", "abertura-cultivo.webp"),
+            (Pagina.Secao.COGUMELOS, "/cogumelos/", "abertura-cogumelos.webp"),
             (Pagina.Secao.MYCOBOX, "/mycobox/", "abertura-growbox.webp"),
         )
         inicio = self.client.get("/").content.decode()

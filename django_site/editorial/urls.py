@@ -53,7 +53,7 @@ urlpatterns = [
                     "Cada ficha apresenta um cogumelo e reúne informação breve sobre o seu habitat "
                     "e algumas curiosidades."
                 ),
-                "imagem_padrao": "editorial/abertura-cogumelos.webp",
+                "imagem_padrao": views.IMAGEM_ABERTURA_COGUMELOS,
                 "imagem_alt_padrao": _("Mesa de estudo com cogumelos, livros ilustrados, cadernos e uma lupa."),
             },
         ),
